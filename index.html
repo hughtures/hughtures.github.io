@@ -3,20 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- UPDATE: page title -->
   <title>Hugh Tures — IT Professional & App Builder</title>
-  <!-- UPDATE: meta description -->
   <meta name="description" content="Portfolio of Hugh Tures, an IT professional specializing in building apps and technical solutions." />
 
-  <!-- Google Fonts: Playfair Display (headings) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       TOKENS & RESET
-    ============================================================ */
     :root {
       --bg-page:      #F5F0E8;
       --bg-alt:       #EDE8DC;
@@ -36,9 +30,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg-page);
       color: var(--text-body);
@@ -47,38 +39,29 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
-
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
 
-    /* ============================================================
-       CONTACT BANNER
-    ============================================================ */
+    /* ── CONTACT BANNER ── */
     #contact-banner {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 101;
       min-height: 38px;
       background: var(--text-dark);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
       padding: 6px 5vw;
     }
-
     .banner-items {
       display: flex;
       align-items: center;
-      gap: 0;
       list-style: none;
       flex-wrap: wrap;
       justify-content: center;
       row-gap: 4px;
     }
-
     .banner-item {
       display: flex;
       align-items: center;
@@ -88,56 +71,48 @@
       color: rgba(245,240,232,0.65);
       white-space: nowrap;
     }
-
-    .banner-item a {
-      color: rgba(245,240,232,0.75);
-      transition: color 0.2s;
-    }
-
+    .banner-item a { color: rgba(245,240,232,0.75); transition: color 0.2s; }
     .banner-item a:hover { color: var(--accent); }
-
     .banner-item svg {
-      width: 12px;
-      height: 12px;
-      stroke: var(--accent);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      width: 12px; height: 12px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
       flex-shrink: 0;
     }
-
+    .banner-sep {
+      width: 1px; height: 14px;
+      background: rgba(245,240,232,0.15);
+      margin: 0 14px; flex-shrink: 0;
+    }
+    .banner-item {
+      position: relative;
+    }
     #copy-confirm {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.7rem;
       color: var(--accent);
       opacity: 0;
       transition: opacity 0.2s;
       pointer-events: none;
+      white-space: nowrap;
+      background: var(--text-dark);
+      border: 1px solid rgba(194,113,79,0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
     }
-
     #copy-confirm.show { opacity: 1; }
 
-    .banner-sep {
-      width: 1px;
-      height: 14px;
-      background: rgba(245,240,232,0.15);
-      margin: 0 14px;
-      flex-shrink: 0;
-    }
-
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
+    /* ── NAV ── */
     nav {
       position: fixed;
-      top: 38px;
-      left: 0;
-      right: 0;
+      top: 38px; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding: 0 5vw;
       height: 64px;
       background: rgba(245,240,232,0.88);
@@ -146,88 +121,39 @@
       border-bottom: 1px solid rgba(221,212,196,0.6);
       transition: box-shadow 0.3s;
     }
-
-    nav.scrolled {
-      box-shadow: 0 2px 16px rgba(44,26,14,0.09);
-    }
-
-    .nav-logo {
-      font-family: var(--font-serif);
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--text-dark);
-      letter-spacing: -0.01em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
+    nav.scrolled { box-shadow: 0 2px 16px rgba(44,26,14,0.09); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
-      position: relative;
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-muted); letter-spacing: 0.02em;
+      transition: color 0.2s; position: relative;
     }
-
     .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      right: 0;
-      height: 1.5px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
+      content: ''; position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
       transition: transform 0.25s ease;
     }
-
-    .nav-links a:hover {
-      color: var(--text-dark);
-    }
-
-    .nav-links a:hover::after {
-      transform: scaleX(1);
-    }
-
-    /* hamburger (mobile) */
+    .nav-links a:hover { color: var(--text-dark); }
+    .nav-links a:hover::after { transform: scaleX(1); }
     .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
+      display: none; flex-direction: column;
+      gap: 5px; cursor: pointer; padding: 4px;
+      background: none; border: none;
     }
-
     .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text-dark);
-      border-radius: 2px;
+      display: block; width: 22px; height: 2px;
+      background: var(--text-dark); border-radius: 2px;
       transition: transform 0.25s, opacity 0.25s;
     }
-
     .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
     @media (max-width: 640px) {
       .nav-links {
-        display: none;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 0;
+        display: none; position: fixed; top: 102px;
+        left: 0; right: 0; flex-direction: column; gap: 0;
         background: var(--bg-page);
         border-bottom: 1px solid var(--divider);
         padding: 1rem 5vw 1.5rem;
@@ -237,173 +163,135 @@
       .nav-toggle { display: flex; }
     }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
+    /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
       padding: 140px 5vw 80px;
       background: linear-gradient(160deg, #F5F0E8 0%, #EDE8DC 60%, #E6DDD0 100%);
+      position: relative;
+      overflow: hidden;
     }
-
     #hero::before, #hero::after { display: none !important; }
-
-.hero-eyebrow {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-
     .hero-name {
       font-family: var(--font-serif);
       font-size: clamp(2.75rem, 6vw, 5rem);
-      font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-weight: 700; color: var(--text-dark);
+      line-height: 1.1; letter-spacing: -0.02em;
       margin-bottom: 1rem;
     }
-
     .hero-tagline {
       font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
+      font-weight: 300; color: var(--text-muted);
+      max-width: 480px; margin: 0 auto 2.5rem;
       letter-spacing: 0.01em;
     }
-
-    .hero-cta-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
     .btn {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      border-radius: 8px;
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      display: inline-block; padding: 0.75rem 1.75rem;
+      border-radius: 8px; font-family: var(--font-sans);
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
-
     .btn-primary {
-      background: var(--accent);
-      color: #fff;
+      background: var(--accent); color: #fff;
       box-shadow: 0 4px 16px rgba(194,113,79,0.28);
     }
-
     .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
+      background: var(--accent-dark); transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(194,113,79,0.36);
     }
-
     .btn-outline {
       background: transparent;
       color: var(--text-dark);
       border: 1.5px solid var(--divider);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
     }
-
+    .btn-outline svg {
+      width: 14px; height: 14px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
     .btn-outline:hover {
       border-color: var(--accent);
       color: var(--accent);
       transform: translateY(-2px);
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translate(-50%, 12px); }
-      to   { opacity: 1; transform: translate(-50%, 0); }
-    }
-
-    /* ============================================================
-       SECTION WRAPPER / DIVIDERS
-    ============================================================ */
+    /* ── SECTION ── */
     section { position: relative; }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 100px 5vw;
-    }
-
+    .section-inner { max-width: 1280px; margin: 0 auto; padding: 100px 5vw; }
     .section-label {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.75rem;
     }
-
     .section-heading {
       font-family: var(--font-serif);
       font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-      font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.25rem;
+      font-weight: 700; color: var(--text-dark);
+      line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 1.25rem;
     }
-
     .warm-divider {
-      width: 100%;
-      height: 1px;
+      width: 100%; height: 1px;
       background: linear-gradient(to right, transparent, var(--divider) 20%, var(--divider) 80%, transparent);
     }
 
-
-    /* ============================================================
-       PROJECTS
-    ============================================================ */
-    #projects {
-      background: var(--bg-page);
-    }
-
-    .projects-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .projects-header .section-heading { margin-bottom: 0.75rem; }
-
-    .projects-sub {
-      color: var(--text-muted);
-      max-width: 500px;
+    /* ── ABOUT ── */
+    #about { background: var(--bg-alt); }
+    .about-inner {
+      max-width: 700px;
       margin: 0 auto;
-      font-size: 0.9375rem;
+      padding: 80px 5vw;
+      text-align: center;
+    }
+    .about-bio {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      border: 1.5px solid var(--divider);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-resume svg {
+      width: 15px; height: 15px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .btn-resume:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
     }
 
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg-page); }
+    .projects-header { text-align: center; margin-bottom: 3.5rem; }
+    .projects-header .section-heading { margin-bottom: 0.75rem; }
+    .projects-sub { color: var(--text-body); max-width: 500px; margin: 0 auto; font-size: 1.05rem; line-height: 1.85; }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.75rem;
+      gap: 2.25rem;
     }
+    @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 900px) {
-      .projects-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .projects-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Project Card */
+    /* ── PROJECT CARD ── */
     .project-card {
       background: var(--bg-card);
       border: 1px solid var(--divider);
@@ -411,330 +299,259 @@
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
     }
-
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 
     .project-img-wrap {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
+      position: relative; overflow: hidden;
       aspect-ratio: 16 / 10;
     }
-
     .project-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.4s ease;
     }
-
-    .project-card:hover .project-img-wrap img {
-      transform: scale(1.04);
-    }
-
+    .project-card:hover .project-img-wrap img { transform: scale(1.04); }
     .project-img-overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(44,26,14,0.0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       transition: background 0.3s;
     }
-
-    .project-img-wrap:hover .project-img-overlay {
-      background: rgba(44,26,14,0.35);
-    }
-
-    .overlay-icon {
-      opacity: 1;
-      transform: scale(1);
-      transition: opacity 0.3s, transform 0.3s, background 0.2s;
-      background: rgba(255,255,255,0.92);
-      border-radius: 999px;
-      padding: 0.45rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
-    }
-
-    .overlay-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke: var(--accent);
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .project-img-wrap:hover .overlay-icon {
-      background: rgba(255,255,255,1);
-      transform: scale(1.05);
-    }
+    .project-img-wrap:hover .project-img-overlay { background: rgba(44,26,14,0.15); }
 
     .project-body {
       padding: 1.375rem 1.5rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      flex: 1; display: flex; flex-direction: column;
     }
-
     .project-title {
       font-family: var(--font-serif);
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
+      font-size: 1.125rem; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.3;
     }
-
     .project-desc {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      flex: 1;
-      margin-bottom: 1.25rem;
+      font-size: 0.875rem; color: var(--text-muted);
+      line-height: 1.7; flex: 1; margin-bottom: 1.25rem;
     }
 
-    .btn-view {
-      align-self: flex-start;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
+    /* ── CARD ACTIONS ── */
+    .card-actions {
       display: flex;
       align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
+      justify-content: space-between;
+      margin-top: auto;
     }
-
-    .btn-view::after {
-      content: '↗';
-      font-size: 0.75rem;
+    .overlay-icon {
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 0.45rem 1.1rem;
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem; font-weight: 600;
+      color: #fff; letter-spacing: 0.02em;
+      box-shadow: 0 2px 10px rgba(194,113,79,0.3);
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap; cursor: pointer; border: none;
     }
-
-    .btn-view:hover {
-      color: var(--text-dark);
+    .overlay-icon svg {
+      width: 13px; height: 13px;
+      stroke: #fff; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
+    .overlay-icon:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
-    /* ============================================================
-       LIGHTBOX / MODAL
-    ============================================================ */
+    .img-github {
+      width: 32px; height: 32px;
+      background: var(--bg-alt);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .img-github svg {
+      width: 15px; height: 15px;
+      stroke: var(--text-muted); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .img-github:hover { background: var(--divider); transform: scale(1.1); }
+
+    /* ── LIGHTBOX ── */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-      padding: 5vw;
+      display: none; position: fixed; inset: 0; z-index: 999;
+      align-items: center; justify-content: center; padding: 5vw;
     }
-
-    .lightbox.open {
-      display: flex;
-    }
-
+    .lightbox.open { display: flex; }
     .lightbox-backdrop {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(20,10,5,0.75);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      cursor: pointer;
-      animation: fadeIn 0.25s ease;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      cursor: pointer; animation: fadeIn 0.25s ease;
     }
-
     .lightbox-panel {
-      position: relative;
-      z-index: 1;
-      background: var(--bg-card);
-      border-radius: 16px;
-      overflow: hidden;
-      max-width: 720px;
-      width: 100%;
+      position: relative; z-index: 1;
+      background: var(--bg-card); border-radius: 16px;
+      overflow: hidden; max-width: 720px; width: 100%;
       box-shadow: var(--shadow-lg);
       animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
     }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.88); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .lightbox-img {
-      width: 100%;
+    /* Image wrap is the zoom/pan viewport */
+    .lightbox-img-wrap {
+      position: relative;
+      overflow: hidden;
       aspect-ratio: 16 / 9;
+      cursor: zoom-in;
+      user-select: none;
+      -webkit-user-select: none;
+      background: #000;
+    }
+    .lightbox-img-wrap.zoomed   { cursor: grab; }
+    .lightbox-img-wrap.dragging { cursor: grabbing; }
+    .lightbox-img {
+      width: 100%; height: 100%;
       object-fit: cover;
+      display: block;
+      transform-origin: 0 0;
+      pointer-events: none;
+      will-change: transform;
     }
 
-    .lightbox-content {
-      padding: 1.75rem 2rem 2rem;
-    }
-
-    .lightbox-title {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      color: var(--text-dark);
-      margin-bottom: 0.625rem;
-    }
-
-    .lightbox-desc {
-      font-size: 0.9375rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-    }
-
-    .lightbox-close {
+    /* Zoom hint badge — fades in on open, fades out after first zoom */
+    .lb-zoom-hint {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      bottom: 0.75rem; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20,10,5,0.55);
+      color: rgba(245,240,232,0.85);
+      font-family: var(--font-sans);
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 4;
+    }
+    .lb-zoom-hint.show { opacity: 1; }
+
+    /* Reset zoom pill — appears when zoomed */
+    .lb-zoom-reset {
+      position: absolute;
+      bottom: 0.75rem; right: 0.75rem;
+      background: rgba(245,240,232,0.92);
+      border: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: var(--font-sans);
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, background 0.2s;
+      z-index: 4;
+      white-space: nowrap;
+    }
+    .lb-zoom-reset.visible { opacity: 1; pointer-events: auto; }
+    .lb-zoom-reset:hover { background: #fff; }
+
+    .lightbox-content { padding: 1.75rem 2rem 2rem; }
+    .lightbox-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.625rem; }
+    .lightbox-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.75; }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       background: rgba(245,240,232,0.9);
       border: none;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, transform 0.2s;
-      z-index: 2;
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 5;
+      transition: background 0.2s;
     }
-
-    .lightbox-close:hover {
-      background: var(--bg-page);
-      transform: rotate(90deg);
+    .lightbox-nav.visible { display: flex; }
+    .lightbox-nav:hover { background: #fff; }
+    .lightbox-nav svg { width: 16px; height: 16px; stroke: var(--text-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .lightbox-prev { left: 0.75rem; }
+    .lightbox-next { right: 0.75rem; }
+    .lightbox-dots {
+      display: flex; justify-content: center;
+      gap: 6px; padding: 0.75rem 0 0;
     }
-
-    .lightbox-close svg {
-      width: 16px;
-      height: 16px;
-      stroke: var(--text-dark);
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
+    .lightbox-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--divider); border: none;
+      cursor: pointer; transition: background 0.2s; padding: 0;
     }
+    .lightbox-dot.active { background: var(--accent); }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
+    .lightbox-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(245,240,232,0.9); border: none; border-radius: 50%;
+      width: 36px; height: 36px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s; z-index: 6;
+    }
+    .lightbox-close:hover { background: var(--bg-page); transform: rotate(90deg); }
+    .lightbox-close svg { width: 16px; height: 16px; stroke: var(--text-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* ── FOOTER ── */
     footer {
-      background: var(--text-dark);
-      color: rgba(245,240,232,0.55);
-      text-align: center;
-      padding: 2.5rem 5vw;
+      background: var(--text-dark); color: rgba(245,240,232,0.55);
+      text-align: center; padding: 2.5rem 5vw;
     }
-
-    .footer-name {
-      font-family: var(--font-serif);
-      font-size: 1.375rem;
-      color: rgba(245,240,232,0.9);
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-tagline {
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
-    }
-
     .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      list-style: none;
+      display: flex; justify-content: center; gap: 1.5rem;
+      flex-wrap: wrap; margin-bottom: 1.25rem; list-style: none;
     }
-
     .footer-links a {
-      font-size: 0.825rem;
-      color: rgba(245,240,232,0.5);
-      transition: color 0.2s;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 0.825rem; color: rgba(245,240,232,0.5);
+      transition: color 0.2s; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.8rem; }
 
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    .footer-copy {
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-    }
-
-    /* ============================================================
-       BACK TO TOP
-    ============================================================ */
+    /* ── BACK TO TOP ── */
     #back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 90;
-      width: 44px;
-      height: 44px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
+      width: 44px; height: 44px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 16px rgba(194,113,79,0.38);
-      opacity: 0;
-      transform: translateY(16px);
+      opacity: 0; transform: translateY(16px);
       transition: opacity 0.3s, transform 0.3s, background 0.2s;
       pointer-events: none;
     }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #back-to-top:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    #back-to-top svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 
-    #back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+    /* ── CIRCUIT CANVAS ── */
+    #circuit-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      animation: circuitFadeIn 2.5s ease forwards;
     }
-
-    #back-to-top:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-    }
-
-    #back-to-top svg {
-      width: 18px;
-      height: 18px;
-      stroke: #fff;
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    @keyframes circuitFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 0.75; }
     }
   </style>
 </head>
 <body>
 
-  <!-- =============================================
-       CONTACT BANNER
-  ============================================= -->
+  <!-- CONTACT BANNER -->
   <div id="contact-banner" role="complementary" aria-label="Contact information">
     <ul class="banner-items">
       <li class="banner-item">
@@ -755,161 +572,192 @@
     </ul>
   </div>
 
-  <!-- =============================================
-       NAVIGATION
-  ============================================= -->
+  <!-- NAV -->
   <nav id="main-nav">
-    <!-- UPDATE: nav logo / initials -->
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
     </ul>
   </nav>
 
-  <!-- =============================================
-       HERO
-  ============================================= -->
+  <!-- HERO -->
   <section id="hero">
+    <canvas id="circuit-canvas"></canvas>
     <h1 class="hero-name">Hugh Tures</h1>
     <p class="hero-tagline">hi, im hugh. i write code. sometimes, it works.</p>
     <div class="hero-cta-group">
       <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="resume.pdf" download class="btn btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
     </div>
   </section>
 
-  <!-- =============================================
-       PROJECTS
-  ============================================= -->
+  <div class="warm-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <span class="section-label">About</span>
+      <h2 class="section-heading">A bit about me</h2>
+      <p class="about-bio">I'm an IT professional looking for my next opportunity, but outside of work, I build things for fun. macOS apps, trading bots, browser games. If it seems worth making, I'll make it. I like solving real problems with code, and sometimes I solve imaginary ones too.</p>
+    </div>
+  </section>
+
+  <div class="warm-divider"></div>
+
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="section-inner">
       <div class="projects-header">
-        <span class="section-label">Work</span>
+        <span class="section-label">Projects</span>
         <h2 class="section-heading">Apps &amp; Projects</h2>
-        <p class="projects-sub">A selection of tools and applications I've designed and built to solve real IT challenges — and occasionally, just to have a bit of fun.</p>
+        <p class="projects-sub">A selection of tools and applications I've designed and built to solve real IT challenges, and occasionally, just to have a bit of fun.</p>
       </div>
 
       <div class="projects-grid">
 
-        <!-- ---- PROJECT 1: Boop It ---- -->
+        <!-- PROJECT 1: Boop It -->
         <div class="project-card"
              data-title="Boop It"
              data-desc="A browser-based twist on the classic Bop It toy from childhood. Hit the button on command before the timer runs out — each round gets faster, the button gets more dramatic, and the game throws in spins, shakes, wobbles, and confetti to keep things chaotic. Built for fun, playable anywhere.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View Boop It preview">
+          <div class="project-img-wrap">
             <img src="https://placehold.co/680x425/1a0f2e/ff6b35?text=Boop+It" alt="Boop It preview" loading="lazy" />
-            <div class="project-img-overlay">
-              <span class="overlay-icon">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                Preview
-              </span>
-            </div>
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Boop It</h3>
             <p class="project-desc">A browser-based twist on the classic Bop It toy. Hit the button on command before time runs out — each round gets faster, more dramatic, and throws in spins, shakes, and confetti. Built for fun, playable anywhere.</p>
-            <a href="https://hughtures.github.io/boop-it" target="_blank" rel="noopener" class="btn-view">View Project</a>
-          </div>
-        </div>
-
-        <!-- ---- PROJECT 2: News Digest ---- -->
-        <div class="project-card"
-             data-title="News Digest"
-             data-desc="A macOS app that aggregates RSS feeds across categories like technology, AI, politics, and entertainment, then uses AI summarization to compile everything into a clean, readable daily digest. Users can customize their sources and set a preferred delivery time — so you get one focused summary instead of an endless scroll of headlines.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View News Digest preview">
-            <img src="https://placehold.co/680x425/1C2333/7EB8F7?text=News+Digest" alt="News Digest preview" loading="lazy" />
-            <div class="project-img-overlay">
+            <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </span>
+              <a href="https://hughtures.github.io/boop-it" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: News Digest -->
+        <div class="project-card"
+             data-title="News Digest"
+             data-desc="A macOS app that aggregates RSS feeds across categories like technology, AI, politics, and entertainment, then uses AI summarization to compile everything into a clean, readable daily digest. Users can customize their sources and set a preferred delivery time — so you get one focused summary instead of an endless scroll of headlines.">
+          <div class="project-img-wrap">
+            <img src="https://placehold.co/680x425/1C2333/7EB8F7?text=News+Digest" alt="News Digest preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">News Digest</h3>
             <p class="project-desc">A macOS app that pulls RSS feeds across tech, AI, politics, and more, then uses AI to compile them into one clean daily summary. Customize your sources and delivery time — one digest, no endless scrolling.</p>
-            <a href="https://github.com/hughtures/news-digest" target="_blank" rel="noopener" class="btn-view">View Project</a>
-          </div>
-        </div>
-
-        <!-- ---- PROJECT 3: TaskFlow ---- -->
-        <div class="project-card"
-             data-title="TaskFlow"
-             data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration — all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View TaskFlow preview">
-            <img src="https://placehold.co/680x425/1E2A1E/6DBF7E?text=TaskFlow" alt="TaskFlow preview" loading="lazy" />
-            <div class="project-img-overlay">
+            <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </span>
+              <a href="https://github.com/hughtures/news-digest" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: TaskFlow -->
+        <div class="project-card"
+             data-title="TaskFlow"
+             data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration — all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way."
+             data-images="taskflow.png,taskflow2.png,taskflow3.png">
+          <div class="project-img-wrap">
+            <img src="taskflow.png" alt="TaskFlow preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">TaskFlow</h3>
             <p class="project-desc">A macOS task manager with Kanban, calendar, and Google Calendar integration in one place. Tasks support subtasks, priorities, tags, and recurring schedules — with a clean interface that stays out of your way.</p>
-            <a href="https://github.com/hughtures/task-flow" target="_blank" rel="noopener" class="btn-view">View Project</a>
-          </div>
-        </div>
-
-        <!-- ---- PROJECT 4: Prediction Bot ---- -->
-        <div class="project-card"
-             data-title="Prediction Bot"
-             data-desc="An automated trading bot that scans binary prediction markets for mispriced opportunities, researches news and social sentiment, and places Kelly-criterion sized positions with built-in risk management. After each trade settles, a postmortem agent reviews what happened and logs lessons learned — so the bot genuinely improves over time. Run it from the command line with a starting bankroll and let it work.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View Prediction Bot preview">
-            <img src="https://placehold.co/680x425/0F1F2E/4DA6E8?text=Prediction+Bot" alt="Prediction Bot preview" loading="lazy" />
-            <div class="project-img-overlay">
+            <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </span>
+              <a href="https://github.com/hughtures/task-flow" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 4: Prediction Bot -->
+        <div class="project-card"
+             data-title="Prediction Bot"
+             data-desc="An automated trading bot that scans binary prediction markets for mispriced opportunities, researches news and social sentiment, and places Kelly-criterion sized positions with built-in risk management. After each trade settles, a postmortem agent reviews what happened and logs lessons learned — so the bot genuinely improves over time. Run it from the command line with a starting bankroll and let it work.">
+          <div class="project-img-wrap">
+            <img src="https://placehold.co/680x425/0F1F2E/4DA6E8?text=Prediction+Bot" alt="Prediction Bot preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Prediction Bot</h3>
             <p class="project-desc">An automated trading bot that scans binary prediction markets, researches news and sentiment, and places risk-managed positions using Kelly criterion sizing. A postmortem agent reviews every trade and logs lessons learned, so it gets sharper over time.</p>
-            <a href="https://github.com/hughtures/prediction-bot" target="_blank" rel="noopener" class="btn-view">View Project</a>
-          </div>
-        </div>
-
-        <!-- ---- PROJECT 5: Stock Analyzer ---- -->
-        <div class="project-card"
-             data-title="Stock Analyzer"
-             data-desc="A desktop and terminal tool that fetches live market data for stocks and crypto, calculates technical indicators like RSI, MACD, and Bollinger Bands, and produces a composite BUY/SELL/HOLD signal. Users can track a personal watchlist, compare multiple tickers side by side, browse trending assets, and export full analysis reports as JSON. Built for educational market research and portfolio monitoring.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View Stock Analyzer preview">
-            <img src="stock_analysis.png" alt="Stock Analyzer preview" loading="lazy" />
-            <div class="project-img-overlay">
+            <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </span>
+              <a href="https://github.com/hughtures/prediction-bot" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 5: Stock Analyzer -->
+        <div class="project-card"
+             data-title="Stock Analyzer"
+             data-desc="A desktop and terminal tool that fetches live market data for stocks and crypto, calculates technical indicators like RSI, MACD, and Bollinger Bands, and produces a composite BUY/SELL/HOLD signal. Users can track a personal watchlist, compare multiple tickers side by side, browse trending assets, and export full analysis reports as JSON. Built for educational market research and portfolio monitoring.">
+          <div class="project-img-wrap">
+            <img src="stock_analysis.png" alt="Stock Analyzer preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Stock Analyzer</h3>
             <p class="project-desc">Fetches live market data for stocks and crypto, calculates RSI, MACD, and Bollinger Bands, and outputs a composite BUY/SELL/HOLD signal. Includes a watchlist, multi-ticker comparison, and JSON export for deeper research.</p>
-            <a href="https://github.com/hughtures/stock-analyzer" target="_blank" rel="noopener" class="btn-view">View Project</a>
-          </div>
-        </div>
-
-        <!-- ---- PROJECT 6: Heat Tracker ---- -->
-        <div class="project-card"
-             data-title="Heat Tracker"
-             data-desc="An iOS app that helps dog owners track their pet's heat cycles with daily symptom logging and automatic cycle predictions. Users can manage multiple dogs, log bleeding intensity, swelling, and behaviour changes, while the app highlights the fertile window and predicts the next cycle from historical patterns. Fully offline, no account needed — just a calendar view, cycle stats, and smart reminders including a 7-day heads-up before the next cycle.">
-          <div class="project-img-wrap" tabindex="0" role="button" aria-label="View Heat Tracker preview">
-            <img src="https://placehold.co/680x425/2D1A2E/E87EB8?text=Heat+Tracker" alt="Heat Tracker preview" loading="lazy" />
-            <div class="project-img-overlay">
+            <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </span>
+              <a href="https://github.com/hughtures/stock-analyzer" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 6: Heat Tracker -->
+        <div class="project-card"
+             data-title="Heat Tracker"
+             data-desc="An iOS app that helps dog owners track their pet's heat cycles with daily symptom logging and automatic cycle predictions. Users can manage multiple dogs, log bleeding intensity, swelling, and behaviour changes, while the app highlights the fertile window and predicts the next cycle from historical patterns. Fully offline, no account needed — just a calendar view, cycle stats, and smart reminders including a 7-day heads-up before the next cycle.">
+          <div class="project-img-wrap">
+            <img src="https://placehold.co/680x425/2D1A2E/E87EB8?text=Heat+Tracker" alt="Heat Tracker preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Heat Tracker</h3>
             <p class="project-desc">An iOS app for tracking dog heat cycles with daily symptom logging, fertile window highlights, and automatic next-cycle predictions. Supports multiple dogs, works fully offline, and sends a 7-day heads-up reminder before the next cycle.</p>
-            <a href="https://github.com/hughtures/heat-tracker" target="_blank" rel="noopener" class="btn-view">View Project</a>
+            <div class="card-actions">
+              <span class="overlay-icon">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Preview
+              </span>
+              <a href="https://github.com/hughtures/heat-tracker" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -919,83 +767,78 @@
 
   <div class="warm-divider"></div>
 
-  <!-- =============================================
-       FOOTER
-  ============================================= -->
+  <!-- FOOTER -->
   <footer>
     <ul class="footer-links">
       <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
     </ul>
-    <!-- UPDATE: copyright name -->
     <p class="footer-copy">&copy; <span id="year"></span> Hugh Tures. All rights reserved.</p>
   </footer>
 
-  <!-- =============================================
-       LIGHTBOX MODAL
-  ============================================= -->
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
     <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
     <div class="lightbox-panel">
       <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+      <!-- Image wrap handles zoom/pan -->
+      <div class="lightbox-img-wrap" id="lightbox-img-wrap">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <span class="lb-zoom-hint" id="lb-zoom-hint">Scroll or pinch to zoom · drag to pan</span>
+        <button class="lb-zoom-reset" id="lb-zoom-reset" aria-label="Reset zoom">↺ Reset</button>
+      </div>
       <div class="lightbox-content">
         <h2 class="lightbox-title" id="lightbox-title"></h2>
         <p class="lightbox-desc" id="lightbox-desc"></p>
+        <div class="lightbox-dots" id="lightbox-dots"></div>
       </div>
     </div>
   </div>
 
-  <!-- =============================================
-       BACK TO TOP
-  ============================================= -->
+  <!-- BACK TO TOP -->
   <button id="back-to-top" aria-label="Back to top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
-  <!-- =============================================
-       JAVASCRIPT
-  ============================================= -->
   <script>
-    // ── Copy email to clipboard ─────────────────────────────────
-    const copyEmailBtn  = document.getElementById('copy-email');
-    const copyConfirm   = document.getElementById('copy-confirm');
+    // ── Copy email ──────────────────────────────────────────────
+    const copyEmailBtn = document.getElementById('copy-email');
+    const copyConfirm  = document.getElementById('copy-confirm');
     let copyTimeout;
-
     copyEmailBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       try {
         await navigator.clipboard.writeText('hughtures@gmail.com');
-        copyConfirm.textContent = '✓ copied';
-        copyConfirm.classList.add('show');
-        clearTimeout(copyTimeout);
-        copyTimeout = setTimeout(() => copyConfirm.classList.remove('show'), 2000);
       } catch {
-        // Fallback for browsers that block clipboard without user gesture
         const ta = document.createElement('textarea');
         ta.value = 'hughtures@gmail.com';
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        copyConfirm.textContent = '✓ copied';
-        copyConfirm.classList.add('show');
-        clearTimeout(copyTimeout);
-        copyTimeout = setTimeout(() => copyConfirm.classList.remove('show'), 2000);
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
       }
+      copyConfirm.textContent = '✓ copied';
+      copyConfirm.classList.add('show');
+      clearTimeout(copyTimeout);
+      copyTimeout = setTimeout(() => copyConfirm.classList.remove('show'), 800);
     });
 
-    // ── Year in footer ──────────────────────────────────────────
+    // ── Year ────────────────────────────────────────────────────
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ── Nav: shadow on scroll + mobile toggle ───────────────────
-    const mainNav    = document.getElementById('main-nav');
-    const navToggle  = document.getElementById('nav-toggle');
-    const navLinks   = document.getElementById('nav-links');
+    // ── Nav ─────────────────────────────────────────────────────
+    const mainNav   = document.getElementById('main-nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    const backToTop = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
       mainNav.classList.toggle('scrolled', window.scrollY > 10);
@@ -1005,70 +848,391 @@
     navToggle.addEventListener('click', () => {
       const open = navToggle.classList.toggle('open');
       navLinks.classList.toggle('open', open);
-      navToggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navToggle.classList.remove('open'); navLinks.classList.remove('open');
+    }));
+
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── Lightbox ────────────────────────────────────────────────
+    const lightbox    = document.getElementById('lightbox');
+    const lbImgWrap   = document.getElementById('lightbox-img-wrap');
+    const lbImg       = document.getElementById('lightbox-img');
+    const lbTitle     = document.getElementById('lightbox-title');
+    const lbDesc      = document.getElementById('lightbox-desc');
+    const lbClose     = document.getElementById('lightbox-close');
+    const lbBackdrop  = document.getElementById('lightbox-backdrop');
+    const lbPrev      = document.getElementById('lightbox-prev');
+    const lbNext      = document.getElementById('lightbox-next');
+    const lbDots      = document.getElementById('lightbox-dots');
+    const lbZoomHint  = document.getElementById('lb-zoom-hint');
+    const lbZoomReset = document.getElementById('lb-zoom-reset');
+
+    let lbImages = [], lbIndex = 0;
+
+    // ── Zoom / Pan state ─────────────────────────────────────────
+    const MIN_SCALE = 1, MAX_SCALE = 6;
+    let scale = 1, tx = 0, ty = 0;
+    let isDragging = false, dStartX = 0, dStartY = 0, dStartTx = 0, dStartTy = 0;
+    let hintTimer = null;
+
+    function applyTransform() {
+      lbImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      const zoomed = scale > 1.01;
+      lbImgWrap.classList.toggle('zoomed', zoomed);
+      lbZoomReset.classList.toggle('visible', zoomed);
+    }
+
+    function clampTranslate() {
+      const W = lbImgWrap.offsetWidth;
+      const H = lbImgWrap.offsetHeight;
+      tx = Math.min(0, Math.max(W * (1 - scale), tx));
+      ty = Math.min(0, Math.max(H * (1 - scale), ty));
+    }
+
+    function resetZoom() {
+      scale = 1; tx = 0; ty = 0;
+      applyTransform();
+      lbImgWrap.classList.remove('zoomed', 'dragging');
+    }
+
+    function showHint() {
+      clearTimeout(hintTimer);
+      lbZoomHint.classList.add('show');
+      hintTimer = setTimeout(() => lbZoomHint.classList.remove('show'), 2800);
+    }
+
+    // Mouse wheel zoom
+    lbImgWrap.addEventListener('wheel', e => {
+      e.preventDefault();
+      const rect = lbImgWrap.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.12 : 0.9;
+      const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * factor));
+      const ratio = newScale / scale;
+      tx = mouseX - ratio * (mouseX - tx);
+      ty = mouseY - ratio * (mouseY - ty);
+      scale = newScale;
+      clampTranslate();
+      applyTransform();
+    }, { passive: false });
+
+    // Double-click: zoom in on spot, or reset if already zoomed
+    lbImgWrap.addEventListener('dblclick', e => {
+      if (scale > 1.01) { resetZoom(); return; }
+      const rect = lbImgWrap.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      const newScale = 2.5;
+      tx = mouseX - newScale * mouseX;
+      ty = mouseY - newScale * mouseY;
+      scale = newScale;
+      clampTranslate();
+      applyTransform();
     });
 
-    // Close mobile nav on link click
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navToggle.classList.remove('open');
-        navLinks.classList.remove('open');
+    // Mouse drag
+    lbImgWrap.addEventListener('mousedown', e => {
+      if (scale <= 1.01) return;
+      e.preventDefault();
+      isDragging = true;
+      dStartX = e.clientX; dStartY = e.clientY;
+      dStartTx = tx; dStartTy = ty;
+      lbImgWrap.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      tx = dStartTx + (e.clientX - dStartX);
+      ty = dStartTy + (e.clientY - dStartY);
+      clampTranslate();
+      applyTransform();
+    });
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      lbImgWrap.classList.remove('dragging');
+    });
+
+    // Touch: pinch-to-zoom + single-finger drag when zoomed
+    let lastPinchDist = null, pinchMidX = 0, pinchMidY = 0;
+    lbImgWrap.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        lastPinchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      } else if (e.touches.length === 1 && scale > 1.01) {
+        isDragging = true;
+        dStartX = e.touches[0].clientX; dStartY = e.touches[0].clientY;
+        dStartTx = tx; dStartTy = ty;
+      }
+    }, { passive: true });
+    lbImgWrap.addEventListener('touchmove', e => {
+      if (e.touches.length === 2 && lastPinchDist !== null) {
+        e.preventDefault();
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        const rect = lbImgWrap.getBoundingClientRect();
+        const localX = midX - rect.left, localY = midY - rect.top;
+        const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (dist / lastPinchDist)));
+        const ratio = newScale / scale;
+        tx = localX - ratio * (localX - tx);
+        ty = localY - ratio * (localY - ty);
+        scale = newScale;
+        lastPinchDist = dist;
+        clampTranslate();
+        applyTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        tx = dStartTx + (e.touches[0].clientX - dStartX);
+        ty = dStartTy + (e.touches[0].clientY - dStartY);
+        clampTranslate();
+        applyTransform();
+      }
+    }, { passive: false });
+    lbImgWrap.addEventListener('touchend', () => {
+      lastPinchDist = null;
+      isDragging = false;
+    });
+
+    lbZoomReset.addEventListener('click', resetZoom);
+
+    // ── Carousel ─────────────────────────────────────────────────
+    function setLbImage(i) {
+      lbIndex = (i + lbImages.length) % lbImages.length;
+      lbImg.src = lbImages[lbIndex];
+      lbDots.querySelectorAll('.lightbox-dot').forEach((d, idx) => d.classList.toggle('active', idx === lbIndex));
+      resetZoom();
+    }
+
+    function buildDots() {
+      lbDots.innerHTML = '';
+      if (lbImages.length < 2) return;
+      lbImages.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'lightbox-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => setLbImage(i));
+        lbDots.appendChild(d);
       });
-    });
-
-    // ── Back to top ──────────────────────────────────────────────
-    const backToTop = document.getElementById('back-to-top');
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // ── Lightbox ─────────────────────────────────────────────────
-    const lightbox      = document.getElementById('lightbox');
-    const lbImg         = document.getElementById('lightbox-img');
-    const lbTitle       = document.getElementById('lightbox-title');
-    const lbDesc        = document.getElementById('lightbox-desc');
-    const lbClose       = document.getElementById('lightbox-close');
-    const lbBackdrop    = document.getElementById('lightbox-backdrop');
+    }
 
     function openLightbox(card) {
-      const imgEl  = card.querySelector('img');
-      const title  = card.closest('.project-card').dataset.title;
-      const desc   = card.closest('.project-card').dataset.desc;
+      const imgEl = card.querySelector('.project-img-wrap img');
+      const raw   = card.dataset.images;
+      lbImages    = raw ? raw.split(',') : [imgEl.src];
+      lbIndex     = 0;
 
-      lbImg.src        = imgEl.src;
-      lbImg.alt        = imgEl.alt;
-      lbTitle.textContent = title;
-      lbDesc.textContent  = desc;
+      lbImg.src           = lbImages[0];
+      lbImg.alt           = imgEl.alt;
+      lbTitle.textContent = card.dataset.title;
+      lbDesc.textContent  = card.dataset.desc;
+
+      const multi = lbImages.length > 1;
+      lbPrev.classList.toggle('visible', multi);
+      lbNext.classList.toggle('visible', multi);
+      buildDots();
+      resetZoom();
+
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lbClose.focus();
+      showHint();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      resetZoom();
+      clearTimeout(hintTimer);
+      lbZoomHint.classList.remove('show');
     }
 
-    // Attach open handler to all image wrappers
-    document.querySelectorAll('.project-img-wrap').forEach(wrap => {
-      wrap.addEventListener('click', () => openLightbox(wrap));
-      wrap.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openLightbox(wrap);
-        }
-      });
+    lbPrev.addEventListener('click', () => setLbImage(lbIndex - 1));
+    lbNext.addEventListener('click', () => setLbImage(lbIndex + 1));
+
+    // Only Preview button opens lightbox
+    document.querySelectorAll('.overlay-icon').forEach(btn => {
+      btn.addEventListener('click', () => openLightbox(btn.closest('.project-card')));
     });
 
     lbClose.addEventListener('click', closeLightbox);
     lbBackdrop.addEventListener('click', closeLightbox);
-
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
-        closeLightbox();
-      }
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')     { closeLightbox(); }
+      if (e.key === 'ArrowLeft')  { setLbImage(lbIndex - 1); }
+      if (e.key === 'ArrowRight') { setLbImage(lbIndex + 1); }
+      if (e.key === '0' || e.key === 'Home') { resetZoom(); }
     });
-  </script>
 
+    // ── Circuit board animation ─────────────────────────────────
+    (function () {
+      const canvas = document.getElementById('circuit-canvas');
+      const ctx    = canvas.getContext('2d');
+      const GRID   = 48;
+      const TRACE  = 'rgba(194, 113, 79,';
+      const NODE   = 'rgba(194, 113, 79,';
+
+      let W, H, cols, rows, nodes, paths, pulses;
+
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+        init();
+      }
+
+      function randInt(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+      function init() {
+        cols = Math.ceil(W / GRID) + 1;
+        rows = Math.ceil(H / GRID) + 1;
+
+        // Define a clear zone around the centre content
+        const clearX1 = W * 0.28;
+        const clearX2 = W * 0.72;
+        const clearY1 = H * 0.32;
+        const clearY2 = H * 0.76;
+
+        // Build a sparse grid of nodes
+        nodes = [];
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const x = c * GRID, y = r * GRID;
+            const inClear = x > clearX1 && x < clearX2 && y > clearY1 && y < clearY2;
+            if (!inClear && Math.random() < 0.28) {
+              nodes.push({ x, y, pulse: Math.random(), speed: 0.004 + Math.random() * 0.006 });
+            }
+          }
+        }
+
+        // Build right-angle traces between nearby nodes
+        paths = [];
+        nodes.forEach(a => {
+          nodes.forEach(b => {
+            if (a === b) return;
+            const dx = Math.abs(a.x - b.x), dy = Math.abs(a.y - b.y);
+            if ((dx === GRID && dy === 0) || (dx === 0 && dy === GRID)) {
+              if (Math.random() < 0.55) paths.push({ a, b, progress: 0, speed: 0.003 + Math.random() * 0.004, done: false });
+            }
+            if (dx === GRID && dy === GRID) {
+              if (Math.random() < 0.2) paths.push({ a, b, progress: 0, speed: 0.002 + Math.random() * 0.003, done: false, elbow: Math.random() < 0.5 });
+            }
+          });
+        });
+
+        // Signal pulses traveling along done paths
+        pulses = [];
+      }
+
+      function spawnPulse() {
+        const donePaths = paths.filter(p => p.done);
+        if (!donePaths.length) return;
+        const p = donePaths[randInt(0, donePaths.length - 1)];
+        pulses.push({ path: p, t: 0, speed: 0.008 + Math.random() * 0.008 });
+      }
+
+      let frame = 0;
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        frame++;
+
+        // Spawn a pulse occasionally
+        if (frame % 90 === 0) spawnPulse();
+
+        // Draw traces (growing)
+        paths.forEach(p => {
+          if (!p.done) p.progress = Math.min(1, p.progress + p.speed);
+          if (p.progress >= 1) p.done = true;
+
+          const t = p.progress;
+          ctx.beginPath();
+          ctx.strokeStyle = `${TRACE} 0.35)`;
+          ctx.lineWidth = 1.2;
+
+          if (p.elbow !== undefined) {
+            // L-shaped trace
+            const mx = p.a.x, my = p.b.y;
+            if (t <= 0.5) {
+              const tt = t * 2;
+              ctx.moveTo(p.a.x, p.a.y);
+              ctx.lineTo(p.a.x + (mx - p.a.x) * tt, p.a.y + (my - p.a.y) * tt);
+            } else {
+              const tt = (t - 0.5) * 2;
+              ctx.moveTo(p.a.x, p.a.y);
+              ctx.lineTo(mx, my);
+              ctx.lineTo(mx + (p.b.x - mx) * tt, my + (p.b.y - my) * tt);
+            }
+          } else {
+            ctx.moveTo(p.a.x, p.a.y);
+            ctx.lineTo(p.a.x + (p.b.x - p.a.x) * t, p.a.y + (p.b.y - p.a.y) * t);
+          }
+          ctx.stroke();
+        });
+
+        // Draw nodes
+        nodes.forEach(n => {
+          n.pulse = (n.pulse + n.speed) % 1;
+          const glow = 0.2 + Math.sin(n.pulse * Math.PI * 2) * 0.12;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = `${NODE} ${glow + 0.5})`;
+          ctx.fill();
+
+          // Outer ring
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 6.5, 0, Math.PI * 2);
+          ctx.strokeStyle = `${NODE} ${glow + 0.1})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        });
+
+        // Draw signal pulses
+        pulses = pulses.filter(pulse => {
+          pulse.t = Math.min(1, pulse.t + pulse.speed);
+          const p = pulse.path;
+          let px, py;
+          if (p.elbow !== undefined) {
+            const mx = p.a.x, my = p.b.y;
+            if (pulse.t <= 0.5) {
+              const tt = pulse.t * 2;
+              px = p.a.x + (mx - p.a.x) * tt;
+              py = p.a.y + (my - p.a.y) * tt;
+            } else {
+              const tt = (pulse.t - 0.5) * 2;
+              px = mx + (p.b.x - mx) * tt;
+              py = my + (p.b.y - my) * tt;
+            }
+          } else {
+            px = p.a.x + (p.b.x - p.a.x) * pulse.t;
+            py = p.a.y + (p.b.y - p.a.y) * pulse.t;
+          }
+
+          const grad = ctx.createRadialGradient(px, py, 0, px, py, 12);
+          grad.addColorStop(0, 'rgba(194,113,79,1)');
+          grad.addColorStop(0.4, 'rgba(194,113,79,0.5)');
+          grad.addColorStop(1, 'rgba(194,113,79,0)');
+          ctx.beginPath();
+          ctx.arc(px, py, 12, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          return pulse.t < 1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      draw();
+    })();
+  </script>
 </body>
 </html>
