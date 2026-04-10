@@ -415,6 +415,16 @@
       pointer-events: none;
       will-change: transform;
     }
+    .lightbox-video {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    /* When showing video, disable zoom cursor and hint */
+    .lightbox-img-wrap.is-video { cursor: default; }
+    .lightbox-img-wrap.is-video .lb-zoom-hint,
+    .lightbox-img-wrap.is-video .lb-zoom-reset { display: none; }
 
     /* Zoom hint badge — fades in on open, fades out after first zoom */
     .lb-zoom-hint {
@@ -430,11 +440,12 @@
       border-radius: 999px;
       pointer-events: none;
       white-space: nowrap;
-      opacity: 0;
+      opacity: 1;
       transition: opacity 0.4s;
       z-index: 4;
     }
-    .lb-zoom-hint.show { opacity: 1; }
+    /* Hide hint once zoomed — user already knows */
+    .lightbox-img-wrap.zoomed .lb-zoom-hint { opacity: 0; }
 
     /* Reset zoom pill — appears when zoomed */
     .lb-zoom-reset {
@@ -625,9 +636,10 @@
         <!-- PROJECT 1: Boop It -->
         <div class="project-card"
              data-title="Boop It"
-             data-desc="A browser-based twist on the classic Bop It toy from childhood. Hit the button on command before the timer runs out — each round gets faster, the button gets more dramatic, and the game throws in spins, shakes, wobbles, and confetti to keep things chaotic. Built for fun, playable anywhere.">
+             data-desc="A browser-based twist on the classic Bop It toy from childhood. Hit the button on command before the timer runs out — each round gets faster, the button gets more dramatic, and the game throws in spins, shakes, wobbles, and confetti to keep things chaotic. Built for fun, playable anywhere."
+             data-images="boopit.png,boopit2.mov">
           <div class="project-img-wrap">
-            <img src="https://placehold.co/680x425/1a0f2e/ff6b35?text=Boop+It" alt="Boop It preview" loading="lazy" />
+            <img src="boopit.png" alt="Boop It preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -672,9 +684,9 @@
         <div class="project-card"
              data-title="TaskFlow"
              data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration — all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way."
-             data-images="taskflow.png,taskflow2.png,taskflow3.png">
+             data-images="taskflow1.jpeg,taskflow2.png,taskflow3.png,taskflow4.png">
           <div class="project-img-wrap">
-            <img src="taskflow.png" alt="TaskFlow preview" loading="lazy" />
+            <img src="taskflow1.jpeg" alt="TaskFlow preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -787,6 +799,7 @@
       <!-- Image wrap handles zoom/pan -->
       <div class="lightbox-img-wrap" id="lightbox-img-wrap">
         <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+        <video class="lightbox-video" id="lightbox-video" controls playsinline loop style="display:none"></video>
         <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
@@ -866,8 +879,11 @@
     const lbPrev      = document.getElementById('lightbox-prev');
     const lbNext      = document.getElementById('lightbox-next');
     const lbDots      = document.getElementById('lightbox-dots');
+    const lbVideo     = document.getElementById('lightbox-video');
     const lbZoomHint  = document.getElementById('lb-zoom-hint');
     const lbZoomReset = document.getElementById('lb-zoom-reset');
+
+    function isVideo(src) { return /\.(mov|mp4|webm|ogg)$/i.test(src); }
 
     let lbImages = [], lbIndex = 0;
 
@@ -875,7 +891,7 @@
     const MIN_SCALE = 1, MAX_SCALE = 6;
     let scale = 1, tx = 0, ty = 0;
     let isDragging = false, dStartX = 0, dStartY = 0, dStartTx = 0, dStartTy = 0;
-    let hintTimer = null;
+    let hintTimer = null; // reserved for future use
 
     function applyTransform() {
       lbImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
@@ -897,11 +913,23 @@
       lbImgWrap.classList.remove('zoomed', 'dragging');
     }
 
-    function showHint() {
-      clearTimeout(hintTimer);
-      lbZoomHint.classList.add('show');
-      hintTimer = setTimeout(() => lbZoomHint.classList.remove('show'), 2800);
+    function showMedia(src) {
+      const video = isVideo(src);
+      lbImgWrap.classList.toggle('is-video', video);
+      if (video) {
+        lbImg.style.display  = 'none';
+        lbVideo.style.display = 'block';
+        lbVideo.src = src;
+        lbVideo.load();
+      } else {
+        lbVideo.pause();
+        lbVideo.src = '';
+        lbVideo.style.display = 'none';
+        lbImg.style.display   = 'block';
+        lbImg.src = src;
+      }
     }
+
 
     // Mouse wheel zoom
     lbImgWrap.addEventListener('wheel', e => {
@@ -1007,7 +1035,7 @@
     // ── Carousel ─────────────────────────────────────────────────
     function setLbImage(i) {
       lbIndex = (i + lbImages.length) % lbImages.length;
-      lbImg.src = lbImages[lbIndex];
+      showMedia(lbImages[lbIndex]);
       lbDots.querySelectorAll('.lightbox-dot').forEach((d, idx) => d.classList.toggle('active', idx === lbIndex));
       resetZoom();
     }
@@ -1029,7 +1057,7 @@
       lbImages    = raw ? raw.split(',') : [imgEl.src];
       lbIndex     = 0;
 
-      lbImg.src           = lbImages[0];
+      showMedia(lbImages[0]);
       lbImg.alt           = imgEl.alt;
       lbTitle.textContent = card.dataset.title;
       lbDesc.textContent  = card.dataset.desc;
@@ -1043,15 +1071,14 @@
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lbClose.focus();
-      showHint();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      lbVideo.pause();
+      lbVideo.src = '';
       resetZoom();
-      clearTimeout(hintTimer);
-      lbZoomHint.classList.remove('show');
     }
 
     lbPrev.addEventListener('click', () => setLbImage(lbIndex - 1));
