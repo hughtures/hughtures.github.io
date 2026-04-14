@@ -399,10 +399,13 @@
       backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       cursor: pointer; animation: fadeIn 0.25s ease;
     }
-    .lightbox-panel {
+    .lightbox-panel-wrap {
       position: relative; z-index: 1;
-      background: var(--bg-card); border-radius: 16px;
       max-width: 900px; width: 100%;
+    }
+    .lightbox-panel {
+      background: var(--bg-card); border-radius: 16px;
+      overflow: hidden; width: 100%;
       box-shadow: var(--shadow-lg);
       animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
       display: flex; flex-direction: row;
@@ -420,7 +423,6 @@
       user-select: none;
       -webkit-user-select: none;
       background: #000;
-      border-radius: 0 16px 16px 0;
     }
     .lightbox-img-wrap.portrait { aspect-ratio: 4 / 5; }
     .lightbox-img-wrap.zoomed   { cursor: grab; }
@@ -489,7 +491,6 @@
     .lightbox-content {
       padding: 1.75rem 1.5rem 2rem;
       width: 240px; flex-shrink: 0;
-      border-radius: 16px 0 0 16px;
       display: flex; flex-direction: column; justify-content: center;
       border-right: 1px solid var(--divider);
     }
@@ -526,11 +527,11 @@
     .lightbox-dot.active { background: var(--accent); }
 
     .lightbox-close {
-      position: absolute; top: 1rem; right: 1rem;
+      position: absolute; top: -12px; right: -12px;
       background: rgba(245,240,232,0.9); border: none; border-radius: 50%;
       width: 36px; height: 36px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s; z-index: 6;
+      transition: background 0.2s, transform 0.2s; z-index: 10;
     }
     .lightbox-close:hover { background: var(--bg-page); transform: rotate(90deg); }
     .lightbox-close svg { width: 16px; height: 16px; stroke: var(--text-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; }
@@ -922,10 +923,11 @@
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
     <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
-    <div class="lightbox-panel">
+    <div class="lightbox-panel-wrap">
       <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
+      <div class="lightbox-panel">
       <div class="lightbox-content">
         <h2 class="lightbox-title" id="lightbox-title"></h2>
         <p class="lightbox-desc" id="lightbox-desc"></p>
@@ -943,6 +945,7 @@
         </button>
         <span class="lb-zoom-hint" id="lb-zoom-hint">Scroll or pinch to zoom · drag to pan</span>
         <button class="lb-zoom-reset" id="lb-zoom-reset" aria-label="Reset zoom">↺ Reset</button>
+      </div>
       </div>
     </div>
   </div>
