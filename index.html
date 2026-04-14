@@ -417,6 +417,7 @@
       -webkit-user-select: none;
       background: #000;
     }
+    .lightbox-img-wrap.portrait { aspect-ratio: 4 / 5; }
     .lightbox-img-wrap.zoomed   { cursor: grab; }
     .lightbox-img-wrap.dragging { cursor: grabbing; }
     .lightbox-img {
@@ -764,9 +765,10 @@
 
         <!-- PROJECT 2: News Digest -->
         <div class="project-card"
+             data-portrait="true"
              data-title="News Digest"
              data-desc="A macOS app that aggregates RSS feeds across categories like technology, AI, politics, and entertainment, then uses AI summarization to compile everything into a clean, readable daily digest. Users can customize their sources and set a preferred delivery time so you get one focused summary instead of an endless scroll of headlines.">
-          <div class="project-img-wrap portrait">
+          <div class="project-img-wrap">
             <img src="newsdigest.png" alt="News Digest preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
@@ -787,10 +789,11 @@
 
         <!-- PROJECT 3: TaskFlow -->
         <div class="project-card"
+             data-portrait="true"
              data-title="TaskFlow"
              data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration, all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way."
              data-images="taskflow1.jpeg,taskflow2.png,taskflow3.png,taskflow4.png">
-          <div class="project-img-wrap portrait">
+          <div class="project-img-wrap">
             <img src="taskflow1.jpeg" alt="TaskFlow preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
@@ -834,10 +837,11 @@
 
         <!-- PROJECT 5: Stock Analyzer -->
         <div class="project-card"
+             data-portrait="true"
              data-title="Stock Analyzer"
              data-desc="A desktop and terminal tool that fetches live market data for stocks and crypto, calculates technical indicators like RSI, MACD, and Bollinger Bands, and produces a composite BUY/SELL/HOLD signal. Users can track a personal watchlist, compare multiple tickers side by side, browse trending assets, and export full analysis reports as JSON. Built for educational market research and portfolio monitoring."
              data-images="stock1.png,stock2.png,stock3.png,stock4.png">
-          <div class="project-img-wrap portrait">
+          <div class="project-img-wrap">
             <img src="stock1.png" alt="Stock Analyzer preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
@@ -1184,6 +1188,8 @@
       const raw   = card.dataset.images;
       lbImages    = raw ? raw.split(',') : [imgEl.src];
       lbIndex     = 0;
+
+      lbImgWrap.classList.toggle('portrait', card.dataset.portrait === 'true');
 
       showMedia(lbImages[0]);
       lbImg.alt           = imgEl.alt;
