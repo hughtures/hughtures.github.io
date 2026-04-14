@@ -230,6 +230,19 @@
       color: var(--accent);
       transform: translateY(-2px);
     }
+    .btn-outline:active {
+      transform: translateY(1px);
+      transition: transform 0.08s;
+    }
+    @keyframes download-arrow {
+      0%   { transform: translateY(0); opacity: 1; }
+      40%  { transform: translateY(4px); opacity: 0.5; }
+      70%  { transform: translateY(-2px); opacity: 1; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .btn-outline.downloading svg {
+      animation: download-arrow 0.5s ease;
+    }
 
     /* ── SECTION ── */
     section { position: relative; scroll-margin-top: 102px; }
@@ -987,6 +1000,12 @@
       copyConfirm.classList.add('show');
       clearTimeout(copyTimeout);
       copyTimeout = setTimeout(() => copyConfirm.classList.remove('show'), 800);
+    });
+
+    // ── Download resume animation ────────────────────────────────
+    document.querySelector('a[download]').addEventListener('click', function() {
+      this.classList.add('downloading');
+      this.addEventListener('animationend', () => this.classList.remove('downloading'), { once: true });
     });
 
     // ── Year ────────────────────────────────────────────────────
