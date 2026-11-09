@@ -14,6 +14,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hugh Tures — IT Professional & App Builder</title>
   <meta name="description" content="Portfolio of Hugh Tures, an IT professional specializing in building apps and technical solutions." />
+  <link rel="canonical" href="https://hughtures.github.io/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C2714F'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='40' font-weight='700' text-anchor='middle' fill='%23F5F0E8'%3EH%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#F5F0E8" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hugh Tures" />
+  <meta property="og:title" content="Hugh Tures — IT Professional &amp; App Builder" />
+  <meta property="og:description" content="Portfolio of Hugh Tures, an IT professional specializing in building apps and technical solutions." />
+  <meta property="og:url" content="https://hughtures.github.io/" />
+  <meta property="og:image" content="https://hughtures.github.io/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hugh Tures — IT Professional & App Builder" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hugh Tures — IT Professional &amp; App Builder" />
+  <meta name="twitter:description" content="Portfolio of Hugh Tures, an IT professional specializing in building apps and technical solutions." />
+  <meta name="twitter:image" content="https://hughtures.github.io/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hugh Tures",
+    "url": "https://hughtures.github.io/",
+    "jobTitle": "IT Professional",
+    "description": "IT professional who builds apps and technical solutions.",
+    "sameAs": [
+      "https://www.linkedin.com/in/hughtures/",
+      "https://github.com/hughtures"
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -810,9 +843,9 @@
         <div class="project-card"
              data-title="Doodle Chess"
              data-desc="A complete chess game drawn as cartoon doodles on notebook paper, built as a single HTML file with no frameworks, build step or tracking. It has a full rules engine (castling, en passant, promotion, draws) and a computer opponent at four strengths, using alpha-beta search with a transposition table and quiescence search, run in a background Web Worker so the page never freezes. Also includes 26 checkmate puzzles with a daily streak, undo and redo, a blunder warning, game review, PGN import and export, nine papers and ten hand-drawn piece sets. Playable by keyboard and screen reader; installs to a phone and works offline."
-             data-images="doodlechess.png,doodlechess2.png,doodlechess3.png">
+             data-images="doodlechess.webp,doodlechess2.webp,doodlechess3.webp">
           <div class="project-img-wrap">
-            <img src="doodlechess.png" alt="Doodle Chess preview" loading="lazy" />
+            <img src="doodlechess.webp" alt="Doodle Chess preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -838,9 +871,9 @@
         <div class="project-card"
              data-title="AfterHours: Medspa AI Scheduler"
              data-desc="A portfolio project exploring a full-stack AI voice scheduling assistant for a medspa use case. AfterHours answers after-hours calls, books Botox, HydraFacial, laser, and other appointments through natural conversation, then sends SMS and email confirmations automatically. Designed with HIPAA-style safeguards in mind, including PHI encryption, audit logging, and a nightly data purge job. Includes a live calendar dashboard, a multi-tab admin panel, and a real-time test console to simulate calls. Powered by Claude AI, Twilio, Deepgram, and ElevenLabs with 509 passing tests."
-             data-images="ava-chat.png,ava-calendar.png,ava-admin.png">
+             data-images="ava-chat.webp,ava-calendar.webp,ava-admin.webp">
           <div class="project-img-wrap">
-            <img src="ava-chat.png" alt="Ava Medspa Scheduler preview" loading="lazy" />
+            <img src="ava-chat.webp" alt="Ava Medspa Scheduler preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -862,9 +895,9 @@
         <div class="project-card"
              data-title="Boop It"
              data-desc="A browser-based twist on the classic Bop It toy from childhood. Hit the button on command before the timer runs out. Each round gets faster, the button gets more dramatic, and the game throws in spins, shakes, wobbles, and confetti to keep things chaotic. Built for fun, playable anywhere."
-             data-images="boopit.png,boopit2.mov">
+             data-images="boopit.webp,boopit2.mp4">
           <div class="project-img-wrap">
-            <img src="boopit.png" alt="Boop It preview" loading="lazy" />
+            <img src="boopit.webp" alt="Boop It preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -888,7 +921,7 @@
              data-title="News Digest"
              data-desc="A macOS app that aggregates RSS feeds across categories like technology, AI, politics, and entertainment, then uses AI summarization to compile everything into a clean, readable daily digest. Users can customize their sources and set a preferred delivery time so you get one focused summary instead of an endless scroll of headlines.">
           <div class="project-img-wrap">
-            <img src="newsdigest.png" alt="News Digest preview" loading="lazy" />
+            <img src="newsdigest.webp" alt="News Digest preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -911,9 +944,9 @@
              data-portrait="true"
              data-title="TaskFlow"
              data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration, all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way."
-             data-images="taskflow1.jpeg,taskflow2.png,taskflow3.png,taskflow4.png">
+             data-images="taskflow1.webp,taskflow2.webp,taskflow3.webp,taskflow4.webp">
           <div class="project-img-wrap">
-            <img src="taskflow1.jpeg" alt="TaskFlow preview" loading="lazy" />
+            <img src="taskflow1.webp" alt="TaskFlow preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -935,9 +968,9 @@
         <div class="project-card"
              data-title="Weather App"
              data-desc="A Dark Sky-inspired desktop weather app built with React, TypeScript, and Electron. It pulls live forecasts from Open-Meteo, displays current conditions, an hour-by-hour chart, a 7-day outlook, and a minute-by-minute precipitation bar. A Leaflet radar map lets you see what's coming, and the app snaps to your location automatically via geolocation. Packaged as a native macOS app with a polished dark UI and smooth Framer Motion animations throughout."
-             data-images="weather3.png,weather.jpeg,weather2.jpeg">
+             data-images="weather3.webp,weather.webp,weather2.webp">
           <div class="project-img-wrap">
-            <img src="weather3.png" alt="Weather App preview" loading="lazy" />
+            <img src="weather3.webp" alt="Weather App preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -960,9 +993,9 @@
              data-portrait="true"
              data-title="Stock Analyzer"
              data-desc="A desktop and terminal tool that fetches live market data for stocks and crypto, calculates technical indicators like RSI, MACD, and Bollinger Bands, and produces a composite BUY/SELL/HOLD signal. Users can track a personal watchlist, compare multiple tickers side by side, browse trending assets, and export full analysis reports as JSON. Built for educational market research and portfolio monitoring."
-             data-images="stock1.png,stock2.png,stock3.png,stock4.png">
+             data-images="stock1.webp,stock2.webp,stock3.webp,stock4.webp">
           <div class="project-img-wrap">
-            <img src="stock1.png" alt="Stock Analyzer preview" loading="lazy" />
+            <img src="stock1.webp" alt="Stock Analyzer preview" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -980,7 +1013,7 @@
           </div>
         </div>
 
-        <!-- PROJECT 6: Heat Tracker -->
+        <!-- PROJECT 6: Heat Tracker (hidden until a real screenshot exists; remove the comment markers to restore)
         <div class="project-card"
              data-title="Heat Tracker"
              data-desc="An iOS app that helps dog owners track their pet's heat cycles with daily symptom logging and automatic cycle predictions. Users can manage multiple dogs, log bleeding intensity, swelling, and behaviour changes, while the app highlights the fertile window and predicts the next cycle from historical patterns. Fully offline, no account needed, just a calendar view, cycle stats, and smart reminders including a 7-day heads-up before the next cycle.">
@@ -1001,7 +1034,7 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div><!-- /projects-grid -->
     </div>
