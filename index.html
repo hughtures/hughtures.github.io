@@ -386,6 +386,28 @@
     }
     .overlay-icon:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
+    /* "Play" sits beside Preview on a project you can open and use right away.
+       margin-right:auto keeps the pair together on the left and leaves the GitHub circle on the right. */
+    .play-link {
+      margin-right: auto; margin-left: 0.5rem;
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.02em;
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .play-link svg {
+      width: 13px; height: 13px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .play-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+
     .img-github {
       width: 32px; height: 32px;
       background: var(--bg-alt);
@@ -630,6 +652,7 @@
     .project-card,
     .btn,
     .overlay-icon,
+    .play-link,
     .img-github,
     .lightbox-panel,
     #circuit-canvas {
@@ -772,6 +795,34 @@
       </div>
 
       <div class="projects-grid">
+
+        <!-- PROJECT: Doodle Chess -->
+        <div class="project-card"
+             data-title="Doodle Chess"
+             data-desc="A complete chess game drawn as cartoon doodles on notebook paper, built as a single HTML file with no frameworks, no build step, no dependencies and no tracking. It has a full rules engine (castling, en passant, promotion, draws by repetition, stalemate and the fifty-move rule) and a computer opponent at four strengths that searches with alpha-beta pruning, a transposition table, killer and history move ordering, null-move pruning and a quiescence search, running in a background Web Worker so the page never freezes. Also includes 26 checkmate puzzles with a daily streak, undo and redo, a blunder warning that offers the move back, game review, PGN import and export, nine papers, ten hand-drawn piece sets, clocks and sound. Fully keyboard and screen-reader playable, and it installs to a phone's home screen and works offline."
+             data-images="doodlechess.png,doodlechess2.png,doodlechess3.png">
+          <div class="project-img-wrap">
+            <img src="doodlechess.png" alt="Doodle Chess preview" loading="lazy" />
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Doodle Chess</h3>
+            <p class="project-desc">A complete chess game drawn as cartoon doodles on notebook paper, in a single HTML file with no frameworks or build step. Full rules engine, a four-level computer opponent running in a background worker, 26 checkmate puzzles, PGN import and export, nine papers and ten hand-drawn piece sets. Plays offline and installs to your phone.</p>
+            <div class="card-actions">
+              <span class="overlay-icon">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Preview
+              </span>
+              <a href="https://hughtures.github.io/doodlechess/" target="_blank" rel="noopener" class="play-link" aria-label="Play Doodle Chess in your browser">
+                <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                Play it
+              </a>
+              <a href="https://github.com/hughtures/doodlechess" target="_blank" rel="noopener" class="img-github" aria-label="Doodle Chess on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
 
         <!-- PROJECT: Ava — Medspa AI Scheduler -->
         <div class="project-card"
