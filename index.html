@@ -492,7 +492,7 @@
     }
     .lightbox-panel-wrap {
       position: relative; z-index: 1;
-      max-width: 900px; width: 100%;
+      max-width: 1040px; width: 100%;
     }
     .lightbox-panel {
       background: var(--bg-card); border-radius: 16px;
@@ -500,10 +500,11 @@
       box-shadow: var(--shadow-lg);
       animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
       display: flex; flex-direction: row;
-      /* Never taller than the window (minus the lightbox's padding and the dots below), so a long
-         description scrolls inside its column instead of running off the bottom of the screen. */
-      max-height: calc(100vh - 10vw - 3rem);
-      max-height: calc(100dvh - 10vw - 3rem);
+      /* A fixed, roomy height (never taller than the window minus the lightbox's padding) gives the
+         description column enough room to show in full; fitDesc() in the script shrinks the text a
+         little more if a long description still doesn't fit. */
+      height: min(620px, calc(100vh - 10vw - 3rem));
+      height: min(620px, calc(100dvh - 10vw - 3rem));
     }
     @keyframes popIn { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -584,8 +585,8 @@
     .lb-zoom-reset:hover { background: #fff; }
 
     .lightbox-content {
-      padding: 1.75rem 1.5rem 2rem;
-      width: 240px; flex-shrink: 0;
+      padding: 1.5rem 1.5rem 1.5rem;
+      width: 360px; flex-shrink: 0;
       display: flex; flex-direction: column; justify-content: center;
       justify-content: safe center; /* centred when it fits; starts at the top when it has to scroll */
       border-right: 1px solid var(--divider);
@@ -596,7 +597,7 @@
               mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
     }
     .lightbox-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.625rem; }
-    .lightbox-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.75; }
+    .lightbox-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; }
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -639,11 +640,15 @@
 
     @media (max-width: 640px) {
       .lightbox { padding: 1rem; }
-      .lightbox-panel { flex-direction: column; max-height: calc(100vh - 2rem - 3rem); max-height: calc(100dvh - 2rem - 3rem); }
-      .lightbox-img-wrap { flex: none; min-height: unset; aspect-ratio: 16 / 9; }
-      .lightbox-img-wrap.portrait { aspect-ratio: 4 / 5; }
-      .lightbox-content { width: auto; border-right: none; border-top: 1px solid var(--divider); flex-shrink: 1; min-height: 0; }
+      .lightbox-panel { flex-direction: column; height: calc(100vh - 2rem - 3rem); height: calc(100dvh - 2rem - 3rem); }
+      /* Keep the picture short so the whole description fits underneath it */
+      .lightbox-img-wrap, .lightbox-img-wrap.portrait { flex: none; min-height: unset; aspect-ratio: auto; height: 34vh; height: 34dvh; }
+      .lightbox-content { width: auto; border-right: none; border-top: 1px solid var(--divider); flex: 1 1 auto; min-height: 0; padding: 1.1rem 1.25rem; }
       .lightbox-dots { justify-content: center; }
+    }
+    /* Short phones: a smaller picture leaves room for the whole description */
+    @media (max-width: 640px) and (max-height: 700px) {
+      .lightbox-img-wrap, .lightbox-img-wrap.portrait { height: 26vh; height: 26dvh; }
     }
 
     /* ── FOOTER ── */
@@ -866,7 +871,7 @@
         <div class="project-card"
              data-portrait="true"
              data-title="Mahj Nights"
-             data-desc="An iPhone scorekeeper for American mahjong game nights. It doesn't play the game; it sits beside the tiles and does the sums. Tap who won, who threw the winning tile and what the hand was worth, and it works out who pays whom, keeps the running tally, and at the end of the night shows the fewest payments that settle everyone up. It supports each group's house rules, seasons and leaderboards, charts of winnings over time, shareable result pictures, and a Home Screen widget. Built for older eyes too: large type, Dynamic Type and VoiceOver support. No account, no ads, no tracking, and everything stays on the device. Free to try, with a one-time in-app purchase that unlocks everything (no subscription). Built with SwiftUI, SwiftData, Swift Charts and WidgetKit, with the scoring logic in its own tested Swift package."
+             data-desc="An iPhone scorekeeper for American mahjong game nights. It doesn't play the game; it sits beside the tiles and does the sums. Tap who won, who threw the tile and what the hand was worth, and it works out who pays whom, keeps the running tally, and shows the fewest payments that settle everyone up at the end of the night. Includes house-rule settings, seasons and leaderboards, charts, shareable result pictures and a Home Screen widget, with large type and VoiceOver support. No account, ads or tracking; everything stays on the device. Free to try, with a one-time in-app purchase that unlocks everything (no subscription). Built with SwiftUI, SwiftData, Swift Charts and WidgetKit."
              data-images="mahj-1.webp,mahj-2.webp,mahj-3.webp,mahj-4.webp,mahj-5.webp,mahj-6.webp">
           <div class="project-img-wrap">
             <img src="mahj-hero.webp" alt="Three screens from Mahj Nights: the game table, choosing who won, and the leaderboard" loading="lazy" />
@@ -919,7 +924,7 @@
         <!-- PROJECT: Ava — Medspa AI Scheduler -->
         <div class="project-card"
              data-title="AfterHours: Medspa AI Scheduler"
-             data-desc="A portfolio project exploring a full-stack AI voice scheduling assistant for a medspa use case. AfterHours answers after-hours calls, books Botox, HydraFacial, laser, and other appointments through natural conversation, then sends SMS and email confirmations automatically. Designed with HIPAA-style safeguards in mind, including PHI encryption, audit logging, and a nightly data purge job. Includes a live calendar dashboard, a multi-tab admin panel, and a real-time test console to simulate calls. Powered by Claude AI, Twilio, Deepgram, and ElevenLabs with 509 passing tests."
+             data-desc="A portfolio project exploring a full-stack AI voice scheduling assistant for a medspa use case. AfterHours answers after-hours calls, books Botox, HydraFacial, laser, and other appointments through natural conversation, then sends SMS and email confirmations automatically. Designed with HIPAA-style safeguards in mind, including PHI encryption, audit logging, and a nightly data purge job. Includes a live calendar dashboard, an admin panel, and a test console that simulates calls. Powered by Claude AI, Twilio, Deepgram, and ElevenLabs with 509 passing tests."
              data-images="ava-chat.webp,ava-calendar.webp,ava-admin.webp">
           <div class="project-img-wrap">
             <img src="ava-chat.webp" alt="Ava Medspa Scheduler preview" loading="lazy" />
@@ -1433,7 +1438,7 @@
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lbContent.scrollTop = 0;
-      updateMoreText();
+      fitDesc();
       lbClose.focus();
     }
 
@@ -1444,7 +1449,20 @@
       lbContent.classList.toggle('has-more', lbContent.scrollHeight - lbContent.scrollTop - lbContent.clientHeight > 4);
     }
     lbContent.addEventListener('scroll', updateMoreText, { passive: true });
-    window.addEventListener('resize', updateMoreText);
+
+    // Show the whole description without scrolling: start at the normal size and step the text
+    // down a little at a time until it fits its column (it never goes below 12px).
+    function fitDesc() {
+      lbDesc.style.fontSize = ''; lbDesc.style.lineHeight = '';
+      let size = parseFloat(getComputedStyle(lbDesc).fontSize);
+      while (size > 12 && lbContent.scrollHeight > lbContent.clientHeight + 1) {
+        size -= 0.5;
+        lbDesc.style.fontSize = size + 'px';
+        lbDesc.style.lineHeight = '1.55';
+      }
+      updateMoreText();
+    }
+    window.addEventListener('resize', () => { if (lightbox.classList.contains('open')) fitDesc(); });
 
     function closeLightbox() {
       lightbox.classList.remove('open');
