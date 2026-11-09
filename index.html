@@ -84,6 +84,26 @@
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
 
+    /* ── ACCESSIBILITY ── */
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .skip-link {
+      position: fixed; top: 0; left: 1rem; z-index: 1000;
+      padding: 0.6rem 1.1rem; border-radius: 0 0 8px 8px;
+      background: var(--text-dark); color: #fff;
+      font-size: 0.9rem; font-weight: 600;
+      transform: translateY(-120%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    #main:focus { outline: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     /* ── CONTACT BANNER ── */
     #contact-banner {
       position: fixed;
@@ -767,6 +787,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- CONTACT BANNER -->
   <div id="contact-banner" role="complementary" aria-label="Contact information">
@@ -801,6 +822,7 @@
     </ul>
   </nav>
 
+  <main id="main" tabindex="-1">
   <!-- HERO -->
   <section id="hero">
     <canvas id="circuit-canvas"></canvas>
@@ -852,10 +874,10 @@
             <h3 class="project-title">Doodle Chess</h3>
             <p class="project-desc">A complete chess game drawn as cartoon doodles on notebook paper, in one HTML file with no frameworks. Four computer levels, 26 puzzles, PGN import and export, and nine papers. Plays offline.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://hughtures.github.io/doodlechess/" target="_blank" rel="noopener" class="play-link" aria-label="Play Doodle Chess in your browser">
                 <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
                 Play it
@@ -880,10 +902,10 @@
             <h3 class="project-title">AfterHours: Medspa AI Scheduler</h3>
             <p class="project-desc">A portfolio prototype of an AI voice assistant that books medspa appointments after hours, designed with HIPAA-style safeguards in mind. AfterHours handles Botox, HydraFacial, and laser bookings through natural conversation, sends SMS/email confirmations, and comes with a live calendar dashboard and admin panel. Powered by Claude AI, Twilio, Deepgram, and ElevenLabs.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/medspa-scheduler" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -904,10 +926,10 @@
             <h3 class="project-title">Boop It</h3>
             <p class="project-desc">A browser-based twist on the classic Bop It toy. Hit the button on command before time runs out. Each round gets faster, more dramatic, and throws in spins, shakes, and confetti. Built for fun, playable anywhere.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://hughtures.github.io/boop-it" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -928,10 +950,10 @@
             <h3 class="project-title">News Digest</h3>
             <p class="project-desc">A macOS app that pulls RSS feeds across tech, AI, politics, and more, then uses AI to compile them into one clean daily summary. Customize your sources and delivery time for one focused digest, no endless scrolling.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/news-digest" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -953,10 +975,10 @@
             <h3 class="project-title">TaskFlow</h3>
             <p class="project-desc">A macOS task manager with Kanban, calendar, and Google Calendar integration in one place. Tasks support subtasks, priorities, tags, and recurring schedules, with a clean interface that stays out of your way.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/task-flow" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -977,10 +999,10 @@
             <h3 class="project-title">Weather App</h3>
             <p class="project-desc">A Dark Sky-inspired desktop weather app with live forecasts, an hourly chart, 7-day outlook, minute-by-minute precipitation, and a live radar map. Built with React, TypeScript, and Electron — packaged as a native macOS app.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/dark-sky-weather" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -1002,10 +1024,10 @@
             <h3 class="project-title">Stock Analyzer</h3>
             <p class="project-desc">Fetches live market data for stocks and crypto, calculates RSI, MACD, and Bollinger Bands, and outputs a composite BUY/SELL/HOLD signal. Includes a watchlist, multi-ticker comparison, and JSON export for deeper research.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/stock-analyzer" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -1025,10 +1047,10 @@
             <h3 class="project-title">Heat Tracker</h3>
             <p class="project-desc">An iOS app for tracking dog heat cycles with daily symptom logging, fertile window highlights, and automatic next-cycle predictions. Supports multiple dogs, works fully offline, and sends a 7-day heads-up reminder before the next cycle.</p>
             <div class="card-actions">
-              <span class="overlay-icon">
+              <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
-              </span>
+              </button>
               <a href="https://github.com/hughtures/heat-tracker" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
@@ -1039,6 +1061,8 @@
       </div><!-- /projects-grid -->
     </div>
   </section>
+
+  </main>
 
   <div class="warm-divider"></div>
 
@@ -1132,11 +1156,18 @@
 
     // ── Dark mode ───────────────────────────────────────────────
     const darkToggle = document.getElementById('dark-toggle');
-    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    // A saved choice wins; on a first visit follow the system setting.
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme ? savedTheme === 'dark' : prefersDark) document.body.classList.add('dark');
+    darkToggle.setAttribute('aria-pressed', document.body.classList.contains('dark'));
 
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      const isDark = document.body.classList.contains('dark');
+      darkToggle.setAttribute('aria-pressed', isDark);
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
     });
 
     // ── Nav ─────────────────────────────────────────────────────
@@ -1150,12 +1181,16 @@
       backToTop.classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
 
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-controls', 'nav-links');
     navToggle.addEventListener('click', () => {
       const open = navToggle.classList.toggle('open');
       navLinks.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       navToggle.classList.remove('open'); navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     }));
 
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -1339,12 +1374,17 @@
       lbImages.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'lightbox-dot' + (i === 0 ? ' active' : '');
+        d.type = 'button';
+        d.setAttribute('aria-label', `Show image ${i + 1} of ${lbImages.length}`);
         d.addEventListener('click', () => setLbImage(i));
         lbDots.appendChild(d);
       });
     }
 
+    let lbOpener = null; // element to hand focus back to on close
+
     function openLightbox(card) {
+      lbOpener = document.activeElement;
       const imgEl = card.querySelector('.project-img-wrap img');
       const raw   = card.dataset.images;
       lbImages    = raw ? raw.split(',') : [imgEl.src];
@@ -1385,6 +1425,8 @@
       lbVideo.pause();
       lbVideo.src = '';
       resetZoom();
+      if (lbOpener && document.contains(lbOpener)) lbOpener.focus();
+      lbOpener = null;
     }
 
     lbPrev.addEventListener('click', () => setLbImage(lbIndex - 1));
@@ -1392,13 +1434,30 @@
 
     // Only Preview button opens lightbox
     document.querySelectorAll('.overlay-icon').forEach(btn => {
-      btn.addEventListener('click', () => openLightbox(btn.closest('.project-card')));
+      const card = btn.closest('.project-card');
+      btn.setAttribute('aria-label', `Preview ${card.dataset.title}`);
+      btn.addEventListener('click', () => openLightbox(card));
+    });
+    // Give the repeated "View on GitHub" icon links a unique name each
+    document.querySelectorAll('.project-card .img-github').forEach(a => {
+      a.setAttribute('aria-label', `${a.closest('.project-card').dataset.title} on GitHub`);
     });
 
     lbClose.addEventListener('click', closeLightbox);
     lbBackdrop.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', e => {
       if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Tab') {
+        // Keep keyboard focus inside the dialog while it is open
+        const focusable = [...lightbox.querySelectorAll('button, a[href], video[controls]')]
+          .filter(el => el.getClientRects().length > 0);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (!lightbox.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        return;
+      }
       if (e.key === 'Escape')     { closeLightbox(); }
       if (e.key === 'ArrowLeft')  { setLbImage(lbIndex - 1); }
       if (e.key === 'ArrowRight') { setLbImage(lbIndex + 1); }
@@ -1559,12 +1618,44 @@
           return pulse.t < 1;
         });
 
-        requestAnimationFrame(draw);
+        rafId = shouldRun() ? requestAnimationFrame(draw) : 0;
       }
 
-      window.addEventListener('resize', resize);
+      // Only animate while the hero is on screen, and not at all for people who ask for reduced motion
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let heroVisible = true;
+      let rafId = 0;
+      function shouldRun() { return heroVisible && !reduceMotion.matches; }
+
+      function sync() {
+        if (shouldRun()) {
+          if (!rafId) rafId = requestAnimationFrame(draw);
+        } else {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      }
+
+      // Reduced motion: draw one finished, still frame instead of animating
+      function drawStill() {
+        paths.forEach(p => { p.progress = 1; p.done = true; });
+        draw();
+      }
+
+      function refresh() {
+        if (reduceMotion.matches) drawStill(); else sync();
+      }
+
+      window.addEventListener('resize', () => { resize(); refresh(); });
+      reduceMotion.addEventListener('change', refresh);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => {
+          heroVisible = entries[0].isIntersecting;
+          sync();
+        }).observe(document.getElementById('hero'));
+      }
       resize();
-      draw();
+      refresh();
     })();
   </script>
 </body>
