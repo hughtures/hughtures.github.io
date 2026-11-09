@@ -444,6 +444,10 @@
       box-shadow: var(--shadow-lg);
       animation: popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
       display: flex; flex-direction: row;
+      /* Never taller than the window (minus the lightbox's padding and the dots below), so a long
+         description scrolls inside its column instead of running off the bottom of the screen. */
+      max-height: calc(100vh - 10vw - 3rem);
+      max-height: calc(100dvh - 10vw - 3rem);
     }
     @keyframes popIn { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -527,7 +531,13 @@
       padding: 1.75rem 1.5rem 2rem;
       width: 240px; flex-shrink: 0;
       display: flex; flex-direction: column; justify-content: center;
+      justify-content: safe center; /* centred when it fits; starts at the top when it has to scroll */
       border-right: 1px solid var(--divider);
+      overflow-y: auto; overscroll-behavior: contain;
+    }
+    .lightbox-content.has-more {
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+              mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
     }
     .lightbox-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.625rem; }
     .lightbox-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.75; }
@@ -573,10 +583,10 @@
 
     @media (max-width: 640px) {
       .lightbox { padding: 1rem; }
-      .lightbox-panel { flex-direction: column; }
+      .lightbox-panel { flex-direction: column; max-height: calc(100vh - 2rem - 3rem); max-height: calc(100dvh - 2rem - 3rem); }
       .lightbox-img-wrap { flex: none; min-height: unset; aspect-ratio: 16 / 9; }
       .lightbox-img-wrap.portrait { aspect-ratio: 4 / 5; }
-      .lightbox-content { width: auto; border-right: none; border-top: 1px solid var(--divider); }
+      .lightbox-content { width: auto; border-right: none; border-top: 1px solid var(--divider); flex-shrink: 1; min-height: 0; }
       .lightbox-dots { justify-content: center; }
     }
 
@@ -799,7 +809,7 @@
         <!-- PROJECT: Doodle Chess -->
         <div class="project-card"
              data-title="Doodle Chess"
-             data-desc="A complete chess game drawn as cartoon doodles on notebook paper, built as a single HTML file with no frameworks, no build step, no dependencies and no tracking. It has a full rules engine (castling, en passant, promotion, draws by repetition, stalemate and the fifty-move rule) and a computer opponent at four strengths that searches with alpha-beta pruning, a transposition table, killer and history move ordering, null-move pruning and a quiescence search, running in a background Web Worker so the page never freezes. Also includes 26 checkmate puzzles with a daily streak, undo and redo, a blunder warning that offers the move back, game review, PGN import and export, nine papers, ten hand-drawn piece sets, clocks and sound. Fully keyboard and screen-reader playable, and it installs to a phone's home screen and works offline."
+             data-desc="A complete chess game drawn as cartoon doodles on notebook paper, built as a single HTML file with no frameworks, build step or tracking. It has a full rules engine (castling, en passant, promotion, draws) and a computer opponent at four strengths, using alpha-beta search with a transposition table and quiescence search, run in a background Web Worker so the page never freezes. Also includes 26 checkmate puzzles with a daily streak, undo and redo, a blunder warning, game review, PGN import and export, nine papers and ten hand-drawn piece sets. Playable by keyboard and screen reader; installs to a phone and works offline."
              data-images="doodlechess.png,doodlechess2.png,doodlechess3.png">
           <div class="project-img-wrap">
             <img src="doodlechess.png" alt="Doodle Chess preview" loading="lazy" />
@@ -807,7 +817,7 @@
           </div>
           <div class="project-body">
             <h3 class="project-title">Doodle Chess</h3>
-            <p class="project-desc">A complete chess game drawn as cartoon doodles on notebook paper, in a single HTML file with no frameworks or build step. Full rules engine, a four-level computer opponent running in a background worker, 26 checkmate puzzles, PGN import and export, nine papers and ten hand-drawn piece sets. Plays offline and installs to your phone.</p>
+            <p class="project-desc">A complete chess game drawn as cartoon doodles on notebook paper, in one HTML file with no frameworks. Four computer levels, 26 puzzles, PGN import and export, and nine papers. Plays offline.</p>
             <div class="card-actions">
               <span class="overlay-icon">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1322,8 +1332,19 @@
 
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+      lbContent.scrollTop = 0;
+      updateMoreText();
       lbClose.focus();
     }
+
+    // Mac scrollbars stay hidden until you scroll, so a long description that scrolls could look cut off.
+    // While there is more text below, the column fades out along its bottom edge as a hint.
+    const lbContent = lbDesc.closest('.lightbox-content');
+    function updateMoreText() {
+      lbContent.classList.toggle('has-more', lbContent.scrollHeight - lbContent.scrollTop - lbContent.clientHeight > 4);
+    }
+    lbContent.addEventListener('scroll', updateMoreText, { passive: true });
+    window.addEventListener('resize', updateMoreText);
 
     function closeLightbox() {
       lightbox.classList.remove('open');
