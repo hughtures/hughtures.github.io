@@ -433,7 +433,8 @@
     .card-actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      flex-wrap: wrap; gap: 0.5rem;
       margin-top: auto;
     }
     .overlay-icon {
@@ -456,9 +457,8 @@
     .overlay-icon:hover { background: var(--accent-btn-hover); transform: translateY(-1px); }
 
     /* "Play" sits beside Preview on a project you can open and use right away.
-       margin-right:auto keeps the pair together on the left and leaves the GitHub circle on the right. */
+       The buttons line up from the left (wrapping on narrow cards); the GitHub circle sits on the right. */
     .play-link {
-      margin-right: auto; margin-left: 0.5rem;
       background: transparent;
       border: 1.5px solid var(--accent-text);
       border-radius: 999px;
@@ -486,6 +486,7 @@
     .play-link.play-live:hover { background: #2F6247; border-color: #2F6247; }
 
     .img-github {
+      margin-left: auto;
       width: 32px; height: 32px;
       background: var(--bg-alt);
       border-radius: 50%;
@@ -919,6 +920,10 @@
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </button>
+              <a href="https://apps.apple.com/us/app/mahj-night-score-keeper/id6827649236" target="_blank" rel="noopener" class="play-link store-link" aria-label="Mahj Nights on the App Store">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                App Store
+              </a>
               <a href="https://mahjnight.github.io/mahjnight/" target="_blank" rel="noopener" class="play-link" aria-label="Mahj Nights website">
                 <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 Website
