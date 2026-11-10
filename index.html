@@ -62,6 +62,10 @@
       --text-muted:   #7A6555;
       --accent:       #C2714F;
       --accent-dark:  #A85B3B;
+      /* Darker terracotta for filled buttons and accent-coloured text: white on --accent is only 3.5:1 */
+      --accent-btn:       #A85B3B;
+      --accent-btn-hover: #8F4B2F;
+      --accent-text:      #A85B3B;
       --divider:      #DDD4C4;
       --shadow-sm:    0 2px 8px rgba(44,26,14,0.07);
       --shadow-md:    0 6px 24px rgba(44,26,14,0.12);
@@ -105,10 +109,16 @@
     }
 
     /* ── CONTACT BANNER ── */
-    #contact-banner {
+    /* The banner and the nav sit in one fixed header, so the nav always starts
+       below the banner however many lines the banner wraps to. */
+    #site-header {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 101;
+    }
+    #contact-banner {
+      position: relative;
+      z-index: 2;
       min-height: 38px;
       background: var(--text-dark);
       display: flex;
@@ -166,15 +176,21 @@
       border-radius: 4px;
     }
     #copy-confirm.show { opacity: 1; }
+    /* On phones the links show short names so the banner stays on one line */
+    .banner-short { display: none; }
+    @media (max-width: 480px) {
+      .banner-long { display: none; }
+      .banner-short { display: inline; }
+      .banner-sep { margin: 0 10px; }
+    }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 38px; left: 0; right: 0;
-      z-index: 100;
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       padding: 0 5vw;
       height: 64px;
       background: rgba(245,240,232,0.88);
@@ -184,6 +200,11 @@
       transition: box-shadow 0.3s;
     }
     nav.scrolled { box-shadow: 0 2px 16px rgba(44,26,14,0.09); }
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text-dark); letter-spacing: -0.01em;
+    }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-size: 0.875rem; font-weight: 500;
@@ -214,7 +235,7 @@
     .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     @media (max-width: 640px) {
       .nav-links {
-        display: none; position: fixed; top: 102px;
+        display: none; position: absolute; top: 100%;
         left: 0; right: 0; flex-direction: column; gap: 0;
         background: var(--bg-page);
         border-bottom: 1px solid var(--divider);
@@ -258,11 +279,11 @@
       cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
     .btn-primary {
-      background: var(--accent); color: #fff;
+      background: var(--accent-btn); color: #fff;
       box-shadow: 0 4px 16px rgba(194,113,79,0.28);
     }
     .btn-primary:hover {
-      background: var(--accent-dark); transform: translateY(-2px);
+      background: var(--accent-btn-hover); transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(194,113,79,0.36);
     }
     .btn-outline {
@@ -280,7 +301,7 @@
     }
     .btn-outline:hover {
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent-text);
       transform: translateY(-2px);
     }
     .btn-outline:active {
@@ -416,7 +437,7 @@
       margin-top: auto;
     }
     .overlay-icon {
-      background: var(--accent);
+      background: var(--accent-btn);
       border-radius: 999px;
       padding: 0.45rem 1.1rem;
       display: flex; align-items: center; gap: 6px;
@@ -432,20 +453,20 @@
       stroke: #fff; fill: none;
       stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
-    .overlay-icon:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .overlay-icon:hover { background: var(--accent-btn-hover); transform: translateY(-1px); }
 
     /* "Play" sits beside Preview on a project you can open and use right away.
        margin-right:auto keeps the pair together on the left and leaves the GitHub circle on the right. */
     .play-link {
       margin-right: auto; margin-left: 0.5rem;
       background: transparent;
-      border: 1.5px solid var(--accent);
+      border: 1.5px solid var(--accent-text);
       border-radius: 999px;
       padding: 0.35rem 1rem;
       display: flex; align-items: center; gap: 6px;
       font-family: var(--font-sans);
       font-size: 0.8rem; font-weight: 600;
-      color: var(--accent); letter-spacing: 0.02em;
+      color: var(--accent-text); letter-spacing: 0.02em;
       text-decoration: none; white-space: nowrap;
       transition: background 0.2s, color 0.2s, transform 0.2s;
     }
@@ -454,7 +475,7 @@
       stroke: currentColor; fill: none;
       stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
-    .play-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+    .play-link:hover { background: var(--accent-btn); border-color: var(--accent-btn); color: #fff; transform: translateY(-1px); }
 
     /* The green, filled "Play it" button for projects that run right in the browser */
     .play-link.play-live {
@@ -675,8 +696,9 @@
       --bg-card:   #3A2A1E;
       --text-dark: #F0E8DC;
       --text-body: #C4B4A4;
-      --text-muted: #8A7060;
-      --divider:   #3C2A1C;
+      --text-muted: #A89382;
+      --accent-text: #D98B68;
+      --divider:   #4A3626;
       --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
       --shadow-md: 0 6px 24px rgba(0,0,0,0.45);
       --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
@@ -699,16 +721,11 @@
     body.dark .lightbox-backdrop {
       background: rgba(5,3,2,0.88);
     }
-    body.dark .project-body {
-      background: #FAF7F2;
-    }
-    body.dark .project-title { color: #2C1A0E; }
-    body.dark .project-desc  { color: #7A6555; }
     body.dark footer {
       background: #0E0A08;
-      color: rgba(245,240,232,0.45);
+      color: rgba(245,240,232,0.6);
     }
-    body.dark .footer-links a { color: rgba(245,240,232,0.4); }
+    body.dark .footer-links a { color: rgba(245,240,232,0.6); }
     body.dark .footer-links a:hover { color: var(--accent); }
 
 
@@ -795,31 +812,46 @@
   </style>
 </head>
 <body>
+  <script>
+    // Set the theme before the first paint so dark-mode visitors don't see a light flash.
+    // A saved choice wins; on a first visit follow the system setting.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) {
+        document.body.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').content = '#2E2018';
+      }
+    })();
+  </script>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <header id="site-header">
   <!-- CONTACT BANNER -->
   <div id="contact-banner" role="complementary" aria-label="Contact information">
     <ul class="banner-items">
       <li class="banner-item">
         <svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <a href="#" id="copy-email" aria-label="Copy email address">hughtures@gmail.com</a>
+        <a href="mailto:hughtures@gmail.com" id="copy-email" aria-label="Copy email address">hughtures@gmail.com</a>
         <span id="copy-confirm" aria-live="polite"></span>
       </li>
       <li class="banner-sep" aria-hidden="true"></li>
       <li class="banner-item">
         <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        <a href="https://www.linkedin.com/in/hughtures/" target="_blank" rel="noopener">linkedin.com/in/hughtures</a>
+        <a href="https://www.linkedin.com/in/hughtures/" target="_blank" rel="noopener"><span class="banner-long">linkedin.com/in/hughtures</span><span class="banner-short">LinkedIn</span></a>
       </li>
       <li class="banner-sep" aria-hidden="true"></li>
       <li class="banner-item">
         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        <a href="https://github.com/hughtures" target="_blank" rel="noopener">github.com/hughtures</a>
+        <a href="https://github.com/hughtures" target="_blank" rel="noopener"><span class="banner-long">github.com/hughtures</span><span class="banner-short">GitHub</span></a>
       </li>
     </ul>
   </div>
 
   <!-- NAV -->
   <nav id="main-nav">
+    <a href="#hero" class="nav-brand">Hugh Tures</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -827,15 +859,17 @@
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="mailto:hughtures@gmail.com">Contact</a></li>
     </ul>
   </nav>
+  </header>
 
   <main id="main" tabindex="-1">
   <!-- HERO -->
   <section id="hero">
     <canvas id="circuit-canvas"></canvas>
     <h1 class="hero-name">Hugh Tures</h1>
-    <p class="hero-tagline">hi, im hugh. i write code. sometimes, it works.</p>
+    <p class="hero-tagline">hi, im hugh. i write code.</p>
     <div class="hero-cta-group">
       <a href="#projects" class="btn btn-primary">View My Work</a>
       <a href="Hugh_Tures_Resume_2026.pdf" download class="btn btn-outline">
@@ -899,7 +933,7 @@
              data-desc="A complete chess game drawn as cartoon doodles on notebook paper, built as a single HTML file with no frameworks, build step or tracking. It has a full rules engine (castling, en passant, promotion, draws) and a computer opponent at four strengths, using alpha-beta search with a transposition table and quiescence search, run in a background Web Worker so the page never freezes. Also includes 26 checkmate puzzles with a daily streak, undo and redo, a blunder warning, game review, PGN import and export, nine papers and ten hand-drawn piece sets. Playable by keyboard and screen reader; installs to a phone and works offline."
              data-images="doodlechess.webp,doodlechess2.webp,doodlechess3.webp">
           <div class="project-img-wrap">
-            <img src="doodlechess.webp" alt="Doodle Chess preview" loading="lazy" />
+            <img src="doodlechess.webp" alt="Doodle Chess: a board with cat and dog pieces drawn on notebook paper, beside a panel of game options" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -921,13 +955,13 @@
           </div>
         </div>
 
-        <!-- PROJECT: Ava — Medspa AI Scheduler -->
+        <!-- PROJECT: AfterHours — Medspa AI Scheduler -->
         <div class="project-card"
              data-title="AfterHours: Medspa AI Scheduler"
              data-desc="A portfolio project exploring a full-stack AI voice scheduling assistant for a medspa use case. AfterHours answers after-hours calls, books Botox, HydraFacial, laser, and other appointments through natural conversation, then sends SMS and email confirmations automatically. Designed with HIPAA-style safeguards in mind, including PHI encryption, audit logging, and a nightly data purge job. Includes a live calendar dashboard, an admin panel, and a test console that simulates calls. Powered by Claude AI, Twilio, Deepgram, and ElevenLabs with 509 passing tests."
              data-images="ava-chat.webp,ava-calendar.webp,ava-admin.webp">
           <div class="project-img-wrap">
-            <img src="ava-chat.webp" alt="Ava Medspa Scheduler preview" loading="lazy" />
+            <img src="ava-chat.webp" alt="AfterHours test console: the assistant greets a caller, with quick prompts and call details alongside" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -951,7 +985,7 @@
              data-desc="A browser-based twist on the classic Bop It toy from childhood. Hit the button on command before the timer runs out. Each round gets faster, the button gets more dramatic, and the game throws in spins, shakes, wobbles, and confetti to keep things chaotic. Built for fun, playable anywhere."
              data-images="boopit.webp,boopit2.mp4">
           <div class="project-img-wrap">
-            <img src="boopit.webp" alt="Boop It preview" loading="lazy" />
+            <img src="boopit.webp" alt="Boop It: a big purple button reading BOINKED! under a count of six bops" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -962,7 +996,11 @@
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </button>
-              <a href="https://hughtures.github.io/boop-it" target="_blank" rel="noopener" class="img-github" aria-label="View on GitHub">
+              <a href="https://hughtures.github.io/boop-it/" target="_blank" rel="noopener" class="play-link play-live" aria-label="Play Boop It in your browser">
+                <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                Play it
+              </a>
+              <a href="https://github.com/hughtures/boop-it" target="_blank" rel="noopener" class="img-github" aria-label="Boop It on GitHub">
                 <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               </a>
             </div>
@@ -976,7 +1014,7 @@
              data-desc="A native macOS menu bar app that fetches RSS feeds across technology, AI, politics, and entertainment, then uses the Claude API to write a clean, de-duplicated daily digest with links back to every source. Built with SwiftUI and AppKit: scheduled generation at a time you choose, an API key stored in the Keychain, a choice of Claude model, history with Markdown export, 59 unit tests, and CI. Screenshots show sample data."
              data-images="newsdigest1.webp,newsdigest2.webp,newsdigest3.webp,newsdigest4.webp">
           <div class="project-img-wrap">
-            <img src="newsdigest1.webp" alt="News Digest preview" loading="lazy" />
+            <img src="newsdigest1.webp" alt="News Digest menu bar window showing a daily digest with Top Stories, Technology and AI sections" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -1001,7 +1039,7 @@
              data-desc="A macOS task management app that lets you organise work across a Kanban board, a calendar view, and a unified Google Calendar integration, all in one place. Tasks support subtasks, priorities, due dates, tags, location, and recurring schedules, with native notifications to keep you on track. Everything lives in a clean, polished interface designed to actually get out of your way."
              data-images="taskflow1.webp,taskflow2.webp,taskflow3.webp,taskflow4.webp">
           <div class="project-img-wrap">
-            <img src="taskflow1.webp" alt="TaskFlow preview" loading="lazy" />
+            <img src="taskflow1.webp" alt="TaskFlow New Project window with colour and icon choices" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -1025,7 +1063,7 @@
              data-desc="A Dark Sky-inspired desktop weather app built with React, TypeScript, and Electron. It pulls live forecasts from Open-Meteo, displays current conditions, an hour-by-hour chart, a 7-day outlook, and a minute-by-minute precipitation bar. A Leaflet radar map lets you see what's coming, and the app snaps to your location automatically via geolocation. Packaged as a native macOS app with a polished dark UI and smooth Framer Motion animations throughout."
              data-images="weather3.webp,weather.webp,weather2.webp">
           <div class="project-img-wrap">
-            <img src="weather3.webp" alt="Weather App preview" loading="lazy" />
+            <img src="weather3.webp" alt="Weather App start screen with a city search box" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -1050,7 +1088,7 @@
              data-desc="A desktop and terminal tool that fetches live market data for stocks and crypto, calculates technical indicators like RSI, MACD, and Bollinger Bands, and produces a composite BUY/SELL/HOLD signal. Users can track a personal watchlist, compare multiple tickers side by side, browse trending assets, and export full analysis reports as JSON. Built for educational market research and portfolio monitoring."
              data-images="stock1.webp,stock2.webp,stock3.webp,stock4.webp">
           <div class="project-img-wrap">
-            <img src="stock1.webp" alt="Stock Analyzer preview" loading="lazy" />
+            <img src="stock1.webp" alt="Stock Analyzer showing a HOLD signal for Bitcoin above candlestick, MACD and RSI charts" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
@@ -1188,18 +1226,16 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ── Dark mode ───────────────────────────────────────────────
+    // The starting theme is set by the small script at the top of <body>, before the first paint.
     const darkToggle = document.getElementById('dark-toggle');
-    // A saved choice wins; on a first visit follow the system setting.
-    let savedTheme = null;
-    try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme ? savedTheme === 'dark' : prefersDark) document.body.classList.add('dark');
+    const themeColor = document.querySelector('meta[name="theme-color"]');
     darkToggle.setAttribute('aria-pressed', document.body.classList.contains('dark'));
 
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       const isDark = document.body.classList.contains('dark');
       darkToggle.setAttribute('aria-pressed', isDark);
+      themeColor.content = isDark ? '#2E2018' : '#F5F0E8';
       try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
     });
 
