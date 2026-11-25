@@ -1037,20 +1037,27 @@
         <!-- PROJECT 4: Weather App -->
         <div class="project-card"
              data-title="Weather App"
-             data-desc="A Dark Sky-inspired desktop weather app built with React, TypeScript, and Electron. It pulls live forecasts from Open-Meteo, displays current conditions, an hour-by-hour chart, a 7-day outlook, and a minute-by-minute precipitation bar. A Leaflet radar map lets you see what's coming, and the app snaps to your location automatically via geolocation. Packaged as a native macOS app with a polished dark UI and smooth Framer Motion animations throughout."
-             data-images="weather3.webp,weather.webp,weather2.webp">
+             data-desc="A weather app where the sky is the interface. Drag a slider across the next 48 hours, or press play for a time-lapse, and the whole scene changes. A hand-written Canvas renderer draws the sun and moon at their real positions for that place and time (with the correct moon phase), rotating stars, clouds, rain with ground splashes, snow, fog and lightning that ease in and out as the weather changes. A Dark Sky-style nowcast says things like &quot;Light rain starting in 25 min, stopping around 3:40 PM&quot; from real 15-minute precipitation data. A Wildfire Watch card lists nearby incidents and perimeters from NIFC, National Weather Service Red Flag Warnings, an air-quality forecast and a fire-weather rating, and flags NASA satellite heat detections that no reported incident explains; when the air is smoky, the sky itself turns amber and the sun dims to a red disc. It shows the right times for cities in other timezones, respects reduced-motion settings, and keeps working when any one data source is down. Built with React, TypeScript and Canvas 2D, with 29 unit tests and CI, and also packaged as a native macOS app with Electron. The wildfire screenshots use synthetic demo data."
+             data-images="weather.webp,weather2.webp,weather3.webp,weather4.webp">
           <div class="project-img-wrap">
-            <img src="weather3.webp" alt="Weather App start screen with a city search box" loading="lazy" />
+            <img src="weather.webp" alt="Weather App showing a thunderstorm sky with layered rain, the forecast scrubber and a rain nowcast" loading="lazy" />
             <div class="project-img-overlay"></div>
           </div>
           <div class="project-body">
             <h3 class="project-title">Weather App</h3>
-            <p class="project-desc">A Dark Sky-inspired desktop weather app with live forecasts, an hourly chart, 7-day outlook, minute-by-minute precipitation, and a live radar map. Built with React, TypeScript, and Electron — packaged as a native macOS app.</p>
+            <p class="project-desc">Scrub through 48 hours and watch a hand-drawn sky change, from real sun and moon positions to rain and lightning. Plus a Wildfire Watch with nearby fires, alerts and smoke.</p>
             <div class="card-actions">
               <button type="button" class="overlay-icon" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Preview
               </button>
+              <a href="https://hughtures.github.io/dark-sky-weather/" target="_blank" rel="noopener" class="play-link play-live" aria-label="Try the Weather App in your browser">
+                <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                Try it
+              </a>
+              <a href="https://github.com/hughtures/dark-sky-weather" target="_blank" rel="noopener" class="img-github" aria-label="Weather App on GitHub">
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </a>
             </div>
           </div>
         </div>
